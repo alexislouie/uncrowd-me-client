@@ -8,39 +8,49 @@ export default class SearchFrom extends React.Component {
             query: '',
             location: '',
             radius: '',
+            formWasSubmitted: false,
             results: [],
         };
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.fetchResults = this.fetchResults.bind(this);
         this.handleQuery = this.handleQuery.bind(this);
         this.handleLocation = this.handleLocation.bind(this);
         this.handleRadius = this.handleRadius.bind(this);
     }
 
     componentDidUpdate() {
-        this.fetchResults();
+        if (this.state.formWasSubmitted === true) {
+            this.fetchResults();
+        }
     }
 
     fetchResults() {
-        const { query, location, radius, results } = this.state;
+        const { query, location, radius } = this.state;
 
         fetch(`${API_BASE_URL}/findPlaces?query=${query}&location=${location}&radius=${radius}`,
             { method: 'GET' })
             .then(res => {
-                console.log('fetching data')
                 if (!res.ok) {
                     return Promise.reject(res.statusText);
                 }
                 return res.json();
             })
             .then(data => {
-                this.setState({ results: data });
+                this.setState({ 
+                    formWasSubmitted: false,
+                    results: data 
+                });
+                this.props.onFormSubmit(data)
             })
-            .then(() => this.props.onFormSubmit(results))
     }
 
     onSubmit(event) {
         event.preventDefault();
+        this.setState({ formWasSubmitted: true });
+        // this.queryInput.value = '';
+        // this.locationInput.value = '';
+        // this.radiusInput.value = '';
     }
 
     handleQuery(event) {
@@ -63,7 +73,7 @@ export default class SearchFrom extends React.Component {
                     What are you looking for?:
                     <br />
                     <input type="text" name="query" placeholder="cafes, grocery stores, etc"
-                        onChange={this.handleQuery} />
+                        ref={this.queryInput} onChange={this.handleQuery} />
                 </label>
                 <br />
                 <br />
@@ -71,7 +81,7 @@ export default class SearchFrom extends React.Component {
                     Location:
                     <br />
                     <input type="text" name="location" placeholder="address"
-                        onChange={this.handleLocation} />
+                        ref={this.locationInput} onChange={this.handleLocation} />
                 </label>
                 <br />
                 <br />
@@ -79,7 +89,7 @@ export default class SearchFrom extends React.Component {
                     Radius (in meters):
                     <br />
                     <input type="number" name="radius"
-                        onChange={this.handleRadius} />
+                        ref={this.radiusInput} onChange={this.handleRadius} />
                 </label>
                 <input type="submit" value="Submit" />
             </form>
