@@ -22,12 +22,12 @@ export default class Results extends Component {
         const places = [];
         this.props.results.forEach(place => {
             const placeId = place.place_id;
-
-            if (place.opening_hours.open_now === false) {
-                place['openOrClosed'] = 'closed';
-            } else {
-                place['openOrClosed'] = 'open';
-            }
+            let refinedPlaceObj = {
+                name: place.name,
+                address: place.formatted_address,
+                rating: place.rating,
+                user_ratings: place.user_ratings_total
+            };
 
             fetch(`${API_BASE_URL}/busyHours/${placeId}`,
                 { method: 'GET' })
@@ -40,9 +40,17 @@ export default class Results extends Component {
                 })
                 .then(data => {
                     if (data.message) {
-                        place['error'] = data.message;
-                    }
-                    else {
+                        refinedPlaceObj['error'] = data.message;
+                    } else {
+                        console.log('place.opening_hours.open_now ', place.opening_hours.open_now)
+                        if (place.opening_hours.open_now === false) {
+                            refinedPlaceObj['openOrClosed'] = 'closed';
+                            refinedPlaceObj['livePercentage'] = 'closed';
+                            refinedPlaceObj['liveStatus'] = 'closed';
+                        } else {
+                            refinedPlaceObj['openOrClosed'] = 'open';
+                        }
+
                         if (data.now) {
                             const livePercentage = data.now.percentage;
                             let liveStatus;
@@ -55,13 +63,13 @@ export default class Results extends Component {
                                 liveStatus = 'as busy as it gets';
                             }
 
-                            place['livePercentage'] = livePercentage;
-                            place['liveStatus'] = liveStatus;
+                            refinedPlaceObj['livePercentage'] = livePercentage;
+                            refinedPlaceObj['liveStatus'] = liveStatus;
                         } else {
-                            place['livePercentage'] = 'unavailable';
-                            place['liveStatus'] = 'unavailable';
+                            refinedPlaceObj['livePercentage'] = 'unavailable';
+                            refinedPlaceObj['liveStatus'] = 'unavailable';
                         }
-                        
+
                         // Account for Google's popular times including 12 AM to 3 AM in the previous day's data 
                         const currentDate = new Date();
                         let currentDay = currentDate.getDay();
@@ -78,34 +86,35 @@ export default class Results extends Component {
                             hoursDataForCurrentDay.forEach(hour => {
                                 if (hour.hour === currentHour) {
                                     const usualPercentage = hour.percentage;
-                                    place['usualPercentage'] = usualPercentage;
+                                    refinedPlaceObj['usualPercentage'] = usualPercentage;
                                     if (usualPercentage <= 50) {
-                                        place['usualStatus'] = 'not too busy';
+                                        refinedPlaceObj['usualStatus'] = 'not too busy';
                                     } else if (usualPercentage <= 80) {
-                                        place['usualStatus'] = 'a little busy';
+                                        refinedPlaceObj['usualStatus'] = 'a little busy';
                                     } else {
-                                        place['usualStatus'] = 'as busy as it gets';
+                                        refinedPlaceObj['usualStatus'] = 'as busy as it gets';
                                     }
                                 }
                                 // sometimes the current hour isn't listed in the data 
                                 // also, IF the store/place is closed, usual and live status shouldn't be shown anyway 
                             })
                         } else {
-                            place['usualStatus'] = 'unavailable';
+                            refinedPlaceObj['usualStatus'] = 'unavailable';
                         }
                     }
-
+                    console.log('refinedPlaceObj ', refinedPlaceObj)
                 })
                 .then(() => {
-                    places.push(place);
+                    places.push(refinedPlaceObj);
 
                     if (places.length === this.props.results.length) {
                         this.setState({ places })
                     }
                 })
         });
-
     }
+
+
 
     render() {
         const { places } = this.state;
