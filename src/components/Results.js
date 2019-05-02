@@ -6,8 +6,7 @@ export default class Results extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            places: [],
-            apiLoading: null
+            places: []
         };
     }
 
@@ -24,16 +23,10 @@ export default class Results extends Component {
         this.props.results.forEach(place => {
             const placeId = place.place_id;
 
-            // Account for Google's popular times including 12 AM to 3 AM in the previous day's data 
-            const currentDate = new Date();
-            let currentDay = currentDate.getDay();
-            const currentHour = currentDate.getHours();
-
-            if (currentHour === 0 || currentHour === 1 || currentHour === 2 || currentHour === 3) {
-                currentDay = currentDate.getDay() - 1;
-                if (currentDay === -1) {
-                    currentDay = 6;
-                }
+            if (place.opening_hours.open_now === false) {
+                place['openOrClosed'] = 'closed';
+            } else {
+                place['openOrClosed'] = 'open';
             }
 
             fetch(`${API_BASE_URL}/busyHours/${placeId}`,
@@ -66,9 +59,20 @@ export default class Results extends Component {
                             place['liveStatus'] = liveStatus;
                         } else {
                             place['livePercentage'] = 'unavailable';
-                            place['liveStatus'] = 'unavailable'
+                            place['liveStatus'] = 'unavailable';
                         }
+                        
+                        // Account for Google's popular times including 12 AM to 3 AM in the previous day's data 
+                        const currentDate = new Date();
+                        let currentDay = currentDate.getDay();
+                        const currentHour = currentDate.getHours();
 
+                        if (currentHour === 0 || currentHour === 1 || currentHour === 2 || currentHour === 3) {
+                            currentDay = currentDate.getDay() - 1;
+                            if (currentDay === -1) {
+                                currentDay = 6;
+                            }
+                        }
                         const hoursDataForCurrentDay = data.week[currentDay].hours;
                         if (hoursDataForCurrentDay) {
                             hoursDataForCurrentDay.forEach(hour => {
@@ -83,6 +87,8 @@ export default class Results extends Component {
                                         place['usualStatus'] = 'as busy as it gets';
                                     }
                                 }
+                                // sometimes the current hour isn't listed in the data 
+                                // also, IF the store/place is closed, usual and live status shouldn't be shown anyway 
                             })
                         } else {
                             place['usualStatus'] = 'unavailable';
