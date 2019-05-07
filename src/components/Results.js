@@ -6,8 +6,7 @@ export default class Results extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            places: [],
-            apiLoading: null
+            places: []
         };
     }
 
@@ -23,18 +22,12 @@ export default class Results extends Component {
         const places = [];
         this.props.results.forEach(place => {
             const placeId = place.place_id;
-
-            // Account for Google's popular times including 12 AM to 3 AM in the previous day's data 
-            const currentDate = new Date();
-            let currentDay = currentDate.getDay();
-            const currentHour = currentDate.getHours();
-
-            if (currentHour === 0 || currentHour === 1 || currentHour === 2 || currentHour === 3) {
-                currentDay = currentDate.getDay() - 1;
-                if (currentDay === -1) {
-                    currentDay = 6;
-                }
-            }
+            let refinedPlaceObj = {
+                name: place.name,
+                address: place.formatted_address,
+                rating: place.rating,
+                user_ratings: place.user_ratings_total
+            };
 
             fetch(`${API_BASE_URL}/busyHours/${placeId}`,
                 { method: 'GET' })
@@ -47,58 +40,84 @@ export default class Results extends Component {
                 })
                 .then(data => {
                     if (data.message) {
-                        place['error'] = data.message;
-                    }
-                    else {
-                        if (data.now) {
-                            const livePercentage = data.now.percentage;
-                            let liveStatus;
+                        refinedPlaceObj['liveStatus'] = data.message;
+                        refinedPlaceObj['usualStatus'] = data.message;
+                        refinedPlaceObj['livePercentage'] = 0;
+                        refinedPlaceObj['usualPercentage'] = 0;
 
-                            if (livePercentage <= 50) {
-                                liveStatus = 'not too busy';
-                            } else if (livePercentage <= 80) {
-                                liveStatus = 'a little busy';
+                    } else {
+                        if (place.opening_hours.open_now === false) {
+                            refinedPlaceObj['openOrClosed'] = 'closed';
+                            refinedPlaceObj['livePercentage'] = 0;
+                            refinedPlaceObj['liveStatus'] = 'closed';
+                            refinedPlaceObj['usualStatus'] = 'closed';
+
+                        } else {
+                            // refinedPlaceObj['openOrClosed'] = 'open';
+                            if (data.now) {
+                                const livePercentage = data.now.percentage;
+                                let liveStatus;
+
+                                if (livePercentage <= 50) {
+                                    liveStatus = 'not too busy';
+                                } else if (livePercentage <= 80) {
+                                    liveStatus = 'a little busy';
+                                } else {
+                                    liveStatus = 'as busy as it gets';
+                                }
+
+                                refinedPlaceObj['livePercentage'] = livePercentage;
+                                refinedPlaceObj['liveStatus'] = liveStatus;
                             } else {
-                                liveStatus = 'as busy as it gets';
+                                refinedPlaceObj['livePercentage'] = 0;
+                                refinedPlaceObj['liveStatus'] = 'unavailable';
                             }
 
-                            place['livePercentage'] = livePercentage;
-                            place['liveStatus'] = liveStatus;
-                        } else {
-                            place['livePercentage'] = 'unavailable';
-                            place['liveStatus'] = 'unavailable'
-                        }
+                            // Account for Google's popular times including 12 AM to 3 AM in the previous day's data 
+                            const currentDate = new Date();
+                            let currentDay = currentDate.getDay();
+                            const currentHour = currentDate.getHours();
 
-                        const hoursDataForCurrentDay = data.week[currentDay].hours;
-                        if (hoursDataForCurrentDay) {
-                            hoursDataForCurrentDay.forEach(hour => {
-                                if (hour.hour === currentHour) {
-                                    const usualPercentage = hour.percentage;
-                                    place['usualPercentage'] = usualPercentage;
-                                    if (usualPercentage <= 50) {
-                                        place['usualStatus'] = 'not too busy';
-                                    } else if (usualPercentage <= 80) {
-                                        place['usualStatus'] = 'a little busy';
-                                    } else {
-                                        place['usualStatus'] = 'as busy as it gets';
-                                    }
+                            if (currentHour === 0 || currentHour === 1 || currentHour === 2 || currentHour === 3) {
+                                currentDay = currentDate.getDay() - 1;
+                                if (currentDay === -1) {
+                                    currentDay = 6;
                                 }
-                            })
-                        } else {
-                            place['usualStatus'] = 'unavailable';
+                            }
+                            const hoursDataForCurrentDay = data.week[currentDay].hours;
+                            if (hoursDataForCurrentDay) {
+                                hoursDataForCurrentDay.forEach(hour => {
+                                    if (hour.hour === currentHour) {
+                                        const usualPercentage = hour.percentage;
+                                        refinedPlaceObj['usualPercentage'] = usualPercentage;
+                                        if (usualPercentage <= 50) {
+                                            refinedPlaceObj['usualStatus'] = 'not too busy';
+                                        } else if (usualPercentage <= 80) {
+                                            refinedPlaceObj['usualStatus'] = 'a little busy';
+                                        } else {
+                                            refinedPlaceObj['usualStatus'] = 'as busy as it gets';
+                                        }
+                                    }
+                                })
+                            } else {
+                                refinedPlaceObj['usualStatus'] = 0;
+                            }
                         }
                     }
-
                 })
                 .then(() => {
-                    places.push(place);
+                    console.log('refinedPlaceObj: ', refinedPlaceObj)
+                    places.push(refinedPlaceObj);
 
                     if (places.length === this.props.results.length) {
                         this.setState({ places })
                     }
                 })
         });
+    }
 
+    determineBestOption() {
+        
     }
 
     render() {
