@@ -96,44 +96,5 @@ export default class Card extends React.Component {
 }
 
 Card.defaultProps = {
-    // text: ''
+    text: ''
 };
-
-
-
-
-// import React from 'react';
-
-// export default function Card(props) {
-//     // export default function Card () {
-//     //     showGreeting() {
-//     //       return props.greeting ? <p>{props.greeting}</p> : ''
-//     //     }
-
-//     //     return (
-//     //       <div>
-//     //         <h1>Hi</h1>
-//     //         {showGreeting()}
-//     //       </div>
-//     //     )
-//     //   } 
-//     return (
-//         <div>
-//             Name: {props.name}<br />
-//             Address: {props.address}<br />
-//             Live Status: {props.liveStatus}<br />
-//             <svg width="100" height="20">
-//                 <rect width={props.livePercentage} height="20" />
-//                 Sorry, your browser does not support inline SVG.
-//             </svg>
-//             <br />
-//             Usual Status: {props.usualStatus}<br />
-//             Rating: {props.rating} out of {props.user_ratings} ratings<br />
-//             <br />
-//         </div>
-//     );
-// }
-
-// Card.defaultProps = {
-//     // text: ''
-// };
