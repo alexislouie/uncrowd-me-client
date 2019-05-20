@@ -1,7 +1,8 @@
 import React from 'react';
+import { Route , withRouter} from 'react-router-dom';
 // import { API_BASE_URL } from '../config';
 
-export default class SearchFrom extends React.Component {
+class SearchFrom extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -474,8 +475,6 @@ export default class SearchFrom extends React.Component {
             }
         ];
 
-
-
         this.setState({ 
                         formWasSubmitted: false,
                         results: data 
@@ -505,9 +504,8 @@ export default class SearchFrom extends React.Component {
     onSubmit(event) {
         event.preventDefault();
         this.setState({ formWasSubmitted: true });
-        // this.queryInput.value = '';
-        // this.locationInput.value = '';
-        // this.radiusInput.value = '';
+        // this.props.history.push(`/search/${this.state.query}/${this.state.location}`);
+
     }
 
     handleQuery(event) {
@@ -549,3 +547,5 @@ export default class SearchFrom extends React.Component {
     }
 
 }
+
+export default withRouter(SearchFrom);
