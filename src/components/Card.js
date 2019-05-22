@@ -13,7 +13,7 @@ export default class Card extends React.Component {
         else if (this.props.liveStatus === 'Place has no popular hours') {
             return (
                 <div>
-                    <span>Live data unavailable</span>
+                    <span>Live data & usual data unavailable</span>
                 </div>
             )
         }
