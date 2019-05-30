@@ -1,4 +1,5 @@
 import React from 'react';
+import './Home.css';
 // import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 export default function Home(props) {
@@ -6,10 +7,11 @@ export default function Home(props) {
         <div className="home">
             <main>
                 <div className="homePage">
-                    <h2>Uncrowd Me.</h2>
-                    <button className="learnMoreButton">Learn more</button>
+                    <h1>Uncrowd <br />
+                        Me.</h1>
+                    <button className="learnMoreButton">Learn More</button>
                 </div>
-                <div className="about">
+                <div className="about hidden">
                     <h2>Living in the city doesn't always have to feel crowded.</h2>
                     <p>
                         We've all experienced it: the elbow-to-elbow crowds at your favorite grocery store on the weekends. Long lines that wrap around the store that only seem to clear up as soon as you've checked out.
