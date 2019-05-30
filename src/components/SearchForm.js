@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchForm.css'
 import { Route , withRouter} from 'react-router-dom';
 // import { API_BASE_URL } from '../config';
 
@@ -541,7 +542,7 @@ class SearchFrom extends React.Component {
                 <br />
                 <br />
 
-                <input type="submit" value="Submit" />
+                <input className="submitButton" type="submit" value="Submit" />
             </form>
         )
     }

@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+    box-sizing: border-box;
+}
+
+.homePage {
+    display: flex;
+    margin-top: 200px;
+    margin-left: 50px;
+    font-family: Roboto Slab, serif;
+    font-size: 40pt;
+}
+
+.learnMoreButton {
+    display: inline-block;
+    background-color: lightgray;
+    font-family: Open Sans, serif;
+    border: none;
+    padding: 5px 10px;
+    height: 35px;
+}
+.learnMoreButton:hover {
+    background-color: lightblue;
+    color: white;
+}
+
+/* .hidden {
+    display: none;
+} */
+.about {
+    font-family: Open Sans, serif;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
+h2 {
+    font-family: Roboto Slab, serif;
+}

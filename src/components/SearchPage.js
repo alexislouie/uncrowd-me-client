@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchForm from './SearchForm';
 import Results from './Results';
+import './SearchPage.css';
 
 export default class SearchPage extends Component {
   constructor(props) {
