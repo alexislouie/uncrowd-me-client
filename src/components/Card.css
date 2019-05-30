@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+/* Animation: fades in, slides in right to left */
+.card {
+    font-family: Open Sans, sans-serif;
+    font-size: 12pt;
+    /* width: 400px;
+    height: 150px; */
+}
+
+li {
+    list-style-type: none;
+}
+
+strong {
+    font-family: Roboto Slab, serif;
+}
+
+.statusBar {
+    stroke: black;
+    stroke-width: 2px;
+}
