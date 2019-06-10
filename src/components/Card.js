@@ -26,7 +26,7 @@ export default class Card extends React.Component {
                     <table>
                         <tbody>
                             <tr>
-                                <td><strong>Usual Status</strong></td>
+                                <td className="statusType"><strong>Usual Status</strong></td>
                                 <td>
                                     <svg width="100" height="17">
                                         <defs>
@@ -42,8 +42,8 @@ export default class Card extends React.Component {
                                         </g>
                                         Sorry, your browser does not support inline SVG.
                                     </svg>
-                                    {this.props.usualStatus}
                                 </td>
+                                <td>{this.props.usualStatus}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -65,7 +65,7 @@ export default class Card extends React.Component {
                     <table>
                         <tbody>
                             <tr>
-                                <td><strong>Live Status</strong></td>
+                                <td className="statusType"><strong>Live Status</strong></td>
                                 <td>
                                     <svg width="100" height="17">
                                         <defs>
@@ -81,11 +81,11 @@ export default class Card extends React.Component {
                                         </g>
                                         Sorry, status bar is not supported by your browser.
                                     </svg>
-                                    {this.props.liveStatus}
                                 </td>
+                                <td>{this.props.liveStatus}</td>
                             </tr>
                             <tr>
-                                <td><strong>Usual Status</strong></td>
+                                <td className="statusType"><strong>Usual Status</strong></td>
                                 <td>
                                     <svg width="100" height="17">
                                         <defs>
@@ -101,8 +101,8 @@ export default class Card extends React.Component {
                                         </g>
                                         Sorry, status bar is not supported by your browser.
                                     </svg>
-                                    {this.props.usualStatus}
                                 </td>
+                                <td>{this.props.usualStatus}</td>
                             </tr>
                             <tr>
                                 <td>{busyStatus}</td>
