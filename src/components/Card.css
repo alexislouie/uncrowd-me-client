@@ -21,3 +21,6 @@ strong {
     stroke: black;
     stroke-width: 2px;
 }
+.statusType {
+    width: 132px;
+}
