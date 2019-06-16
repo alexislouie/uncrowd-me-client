@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
+import './Results.css';
 
 const handleApiLoaded = (map, maps) => {
     // use map and maps objects

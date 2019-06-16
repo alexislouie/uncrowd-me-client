@@ -136,7 +136,7 @@ export default class Results extends Component {
         );
 
         return (
-            <div>
+            <div className="results">
                 <div className="googleMap">
                     <GoogleMap places={places} userCoordinates={userCoordinates}/>
                 </div>
