@@ -5,6 +5,7 @@
 
 .googleMap {
     /* display: inline-block; */
+    position: sticky;
     flex-basis: 60%;
 }
 
