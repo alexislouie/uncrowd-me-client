@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { API_BASE_URL } from '../config'
 import Card from './Card';
+import GoogleMap from './Map';
 
 export default class Results extends Component {
     constructor(props) {
@@ -20,13 +21,16 @@ export default class Results extends Component {
     fetchBusyHours() {
         console.log('fetchBusyHours called');
         const places = [];
-        this.props.results.forEach(place => {
+        this.props.results.places.forEach(place => {
             const placeId = place.place_id;
             let refinedPlaceObj = {
                 name: place.name,
+                id: place.place_id,
                 address: place.formatted_address,
                 rating: place.rating,
-                user_ratings: place.user_ratings_total
+                user_ratings: place.user_ratings_total,
+                lat: place.geometry.location.lat,
+                lng: place.geometry.location.lng
             };
 
             fetch(`${API_BASE_URL}/busyHours/${placeId}`,
@@ -109,19 +113,17 @@ export default class Results extends Component {
                     console.log('refinedPlaceObj: ', refinedPlaceObj)
                     places.push(refinedPlaceObj);
 
-                    if (places.length === this.props.results.length) {
+                    if (places.length === this.props.results.places.length) {
                         this.setState({ places })
                     }
                 })
         });
     }
 
-    determineBestOption() {
-        
-    }
-
     render() {
         const { places } = this.state;
+        const { userCoordinates } = this.props.results;
+        console.log('userCoordinates: ', userCoordinates)
 
         if (this.state.places.length === 0) {
             return null;
@@ -135,9 +137,14 @@ export default class Results extends Component {
 
         return (
             <div>
-                <ul>
-                    {placesAsDomElements}
-                </ul>
+                <div className="googleMap">
+                    <GoogleMap places={places} userCoordinates={userCoordinates}/>
+                </div>
+                <div className="listResults">
+                    <ul>
+                        {placesAsDomElements}
+                    </ul>
+                </div>
             </div>
         )
 
