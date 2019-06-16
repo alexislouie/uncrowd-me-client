@@ -1,0 +1,10 @@
+.userLocation {
+    width: 5px;
+    height: 5px;
+    background-color: blue;
+}
+.placeMarker {
+    width: 5px;
+    height: 5px;
+    background-color: red;
+}

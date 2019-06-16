@@ -1,0 +1,15 @@
+.results {
+    display: flex;
+    margin-top: 50px;
+}
+
+.googleMap {
+    /* display: inline-block; */
+    position: sticky;
+    flex-basis: 60%;
+}
+
+/* 
+when smaller, googleMap and listResults should be 100% width 
+and maps should be a much smaller height 
+*/
