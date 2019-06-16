@@ -10,8 +10,8 @@ const handleApiLoaded = (map, maps) => {
 export default class GoogleMap extends Component {
     static defaultProps = {
         center: {
-            lat: 40.7112334,
-            lng: -73.9570399
+            lat: 40.7831,
+            lng: -73.9712
         },
         zoom: 13
     };
