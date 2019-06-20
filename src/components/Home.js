@@ -7,8 +7,7 @@ export default function Home(props) {
         <div className="home">
             <main>
                 <div className="homePage">
-                    <h1>Uncrowd <br />
-                        Me.</h1>
+                    <h1>Uncrowd Me.</h1>
                     <button className="learnMoreButton">Learn More</button>
                 </div>
                 <div className="about hidden">

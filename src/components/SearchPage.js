@@ -24,7 +24,6 @@ export default class SearchPage extends Component {
 
     return (
       <div className="App">
-        <h1>Uncrowd Me</h1>
         <SearchForm
           onFormSubmit={results => {
             this.onFormSubmit(results)
