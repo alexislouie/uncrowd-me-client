@@ -10,6 +10,10 @@ export default class Results extends Component {
             places: []
         };
     }
+    
+    componentDidMount() {
+        console.log('Results component has mounted')
+    }
 
     componentDidUpdate(prevProps) {
         console.log('Result Component updated!')

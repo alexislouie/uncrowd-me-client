@@ -19,16 +19,35 @@ class SearchFrom extends React.Component {
         this.handleQuery = this.handleQuery.bind(this);
         this.handleLocation = this.handleLocation.bind(this);
         // this.handleRadius = this.handleRadius.bind(this);
+
+        this.createDataObj = this.createDataObj.bind(this);
     }
 
     componentDidUpdate() {
         if (this.state.formWasSubmitted === true) {
-            this.fetchResults();
+            this.createDataObj();
+
+            // this.props.query(this.state.query);
+            // this.props.location(this.state.location);
+            // this.props.radius(this.state.radius);
+            // this.setState({ formWasSubmitted: false });
+            
+            // this.fetchResults();
         }
     }
 
+    createDataObj() {
+        const { query, location, radius } = this.state;
+        // const data = {
+        //     query,
+        //     location, 
+        //     radius
+        // }
+        // this.props.onFormSubmit(data); 
+        this.props.onFormSubmit(query, location, radius); 
+        this.setState({ formWasSubmitted: false })
+    }
     fetchResults() {
-
         const data = {
             places: [
                 {
@@ -616,17 +635,17 @@ class SearchFrom extends React.Component {
                         ]
                     }]
                 }],
-                userCoordinates: [
-                    40.7112334,
-                    -73.9570399
-                ]
+            userCoordinates: [
+                40.7112334,
+                -73.9570399
+            ]
         };
 
         this.setState({
             formWasSubmitted: false,
             results: data
         });
-        this.props.onFormSubmit(data)
+        this.props.onFormSubmit(data);
 
 
         // const { query, location } = this.state;
@@ -670,7 +689,8 @@ class SearchFrom extends React.Component {
 
     render() {
         return (
-            <form onSubmit={e => this.onSubmit(e)}>
+
+            <form>
                 <label>
                     What are you looking for?
                     <br />
@@ -688,7 +708,7 @@ class SearchFrom extends React.Component {
                 <br />
                 <br />
 
-                <input className="submitButton" type="submit" value="Submit" />
+                <input onClick={e => this.onSubmit(e)} className="submitButton" type="submit" value="Submit" />
             </form>
         )
     }
