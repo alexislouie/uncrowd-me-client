@@ -13,9 +13,6 @@ export default class SearchPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // query: '',
-      // location: '',
-      // radius: '',
       results: []
     };
 
@@ -649,15 +646,6 @@ export default class SearchPage extends Component {
     return (
       <div className="App">
         <SearchForm
-          // query={query => {
-          //   this.setState({query})
-          // }}
-          // location={location => {
-          //   this.setState({location})
-          // }}
-          // radius={radius => {
-          //   this.setState({radius})
-          // }}
           onFormSubmit={(query, location, radius) => {
             this.fetchResults(query, location, radius)
           }} />
