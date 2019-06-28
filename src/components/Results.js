@@ -10,6 +10,11 @@ export default class Results extends Component {
             places: []
         };
     }
+    
+    componentDidMount() {
+        console.log('Results component has mounted')
+        this.props.hideLoader();
+    }
 
     componentDidUpdate(prevProps) {
         console.log('Result Component updated!')
@@ -21,6 +26,9 @@ export default class Results extends Component {
     fetchBusyHours() {
         console.log('fetchBusyHours called');
         const places = [];
+
+        this.props.showLoader();
+
         this.props.results.places.forEach(place => {
             const placeId = place.place_id;
             let refinedPlaceObj = {
@@ -117,6 +125,7 @@ export default class Results extends Component {
                         this.setState({ places })
                     }
                 })
+                .then(() => this.props.hideLoader())
         });
     }
 

@@ -1,7 +1,15 @@
 import React from 'react';
 import './Card.css';
 
+// const loader = document.querySelector('.loader');
+
+// const showLoader = () => loader.classList.remove('loader--hide');
+// const hideLoader = () => loader.classList.add('loader--hide');
+
 export default class Card extends React.Component {
+    // componentDidMount() {
+    //     hideLoader();
+    // }
 
     checkStatus() {
         const livePercentageAsString = `${this.props.livePercentage}%`
