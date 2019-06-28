@@ -26,24 +26,11 @@ class SearchFrom extends React.Component {
     componentDidUpdate() {
         if (this.state.formWasSubmitted === true) {
             this.createDataObj();
-
-            // this.props.query(this.state.query);
-            // this.props.location(this.state.location);
-            // this.props.radius(this.state.radius);
-            // this.setState({ formWasSubmitted: false });
-            
-            // this.fetchResults();
         }
     }
 
     createDataObj() {
         const { query, location, radius } = this.state;
-        // const data = {
-        //     query,
-        //     location, 
-        //     radius
-        // }
-        // this.props.onFormSubmit(data); 
         this.props.onFormSubmit(query, location, radius); 
         this.setState({ formWasSubmitted: false })
     }
