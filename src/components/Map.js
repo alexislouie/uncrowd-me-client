@@ -17,17 +17,24 @@ export default class GoogleMap extends Component {
     };
 
     render() {
-        const { places } = this.props;
-        
+        const { places, userCoordinates, zoom } = this.props;
+
         return (
             <div style={{ height: '100vh', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyBmA40LNSpv2kVlUf8Byn-YW6W_ji6zuMY' }}
-                    defaultCenter={this.props.userCoordinates}
-                    defaultZoom={this.props.zoom}
+                    defaultCenter={userCoordinates}
+                    defaultZoom={zoom}
                     yesIWantToUseGoogleMapApiInternals={true}
                     onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                 >
+
+                    <MapMarker
+                        lat={userCoordinates[0]}
+                        lng={userCoordinates[1]}
+                        userLocation={true}
+                        text="Your location"
+                    />
 
                     {places.map(place => (
                         <MapMarker
@@ -37,12 +44,6 @@ export default class GoogleMap extends Component {
                         />
                     ))}
 
-                    <MapMarker
-                        lat={this.props.userCoordinates.lat}
-                        lng={this.props.userCoordinates.lng}
-                        userLocation={true}
-                        text="Your location"
-                    />
                 </GoogleMapReact>
             </div>
         );
