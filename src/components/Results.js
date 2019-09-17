@@ -7,17 +7,19 @@ export default class Results extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            places: []
+            places: [],
+            hoveredMarkerId: '',
+            hoveredCardId: '',
+            clickedMarkerDetails: {},
         };
     }
     
     componentDidMount() {
-        console.log('Results component has mounted')
         this.props.hideLoader();
     }
 
-    componentDidUpdate(prevProps) {
-        console.log('Result Component updated!')
+    componentDidUpdate(prevProps, prevState) {
+        console.log('Result Component updated!');
         if (this.props.results !== prevProps.results) {
             this.fetchBusyHours();
         }
@@ -129,8 +131,27 @@ export default class Results extends Component {
         });
     }
 
+    handleHoveredMarker(id) {
+        if (this.state.hoveredMarkerId !== id) {
+            this.setState({ hoveredMarkerId: id} )
+        }
+    }
+
+    handleHoveredCard(hoveredCardId) {
+        if (this.state.hoveredCardId !== hoveredCardId) {
+            this.setState({ hoveredCardId } )
+        }
+    }
+
+    handleMarkerClick(clickedMarkerDetails){
+        if (this.state.clickedMarkerDetails !== clickedMarkerDetails) {
+            this.setState({ clickedMarkerDetails } )
+        }
+    }
+
+
     render() {
-        const { places } = this.state;
+        const { places, hoveredMarkerId, hoveredCardId, clickedMarkerDetails } = this.state;
         const { userCoordinates } = this.props.results;
         console.log('userCoordinates: ', userCoordinates)
 
@@ -140,14 +161,22 @@ export default class Results extends Component {
 
         const placesAsDomElements = places.map((place, index) =>
             <li key={index}>
-                <Card {...place} />
+                <Card {...place} hoveredMarkerId={hoveredMarkerId} updateHoverId={this.handleHoveredCard.bind(this)} index={index}/>
             </li>
         );
 
         return (
             <div className="results">
                 <div className="googleMap">
-                    <GoogleMap places={places} userCoordinates={userCoordinates}/>
+                    <GoogleMap 
+                        places={places} 
+                        userCoordinates={userCoordinates} 
+                        hoveredCardId={hoveredCardId}
+                        currentHover={hoveredMarkerId}
+                        updateHoveredMarker={this.handleHoveredMarker.bind(this)}
+                        handleMarkerClick={this.handleMarkerClick.bind(this)}
+                        infoBoxDetails={clickedMarkerDetails}
+                        />
                 </div>
                 <div className="listResults">
                     <ul>
