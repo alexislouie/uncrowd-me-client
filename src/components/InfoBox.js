@@ -4,8 +4,10 @@ import './InfoBox.css';
 
 export default function InfoBox(props) {
 
+    const style = (props.name) ? { display: 'block' } : { display: 'none' };
+
     return (
-        <div className="infoBox">
+        <div className="infoBox" style={style}>
             {props.name}
             {props.address}
         </div>
