@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import './MapMarker.css';
 
 export default class MapMarker extends Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     handleInfoBox() {
         const { name, address, lat, lng } = this.props;
