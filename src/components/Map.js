@@ -22,19 +22,13 @@ export default class GoogleMap extends Component {
         this.updatehoveredMarkerId = this.updatehoveredMarkerId.bind(this);
     }
 
-
     showInfoBox(name, address, lat, lng) {
-        // <InfoBox name={name} address={address} lat={lat} lng={lng}/>
         const infoBoxDetails = { name, address, lat, lng };
         this.props.handleMarkerClick(infoBoxDetails);
     }
 
     updatehoveredMarkerId(value) {
         this.props.updateHoveredMarker(value);
-    }
-
-    handleMarkerClick() {
-
     }
 
     render() {
@@ -75,6 +69,7 @@ export default class GoogleMap extends Component {
                     ))}
 
                         <InfoBox {...infoBoxDetails} />
+                        
                 </GoogleMapReact>
             </div>
         );
