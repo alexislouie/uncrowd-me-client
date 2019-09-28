@@ -19,14 +19,13 @@ export default class Results extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('Result Component updated!');
+        // console.log('Result Component updated!');
         if (this.props.results !== prevProps.results) {
             this.fetchBusyHours();
         }
     }
 
     fetchBusyHours() {
-        console.log('fetchBusyHours called');
         const places = [];
 
         this.props.showLoader();

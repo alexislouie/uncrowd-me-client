@@ -30,7 +30,7 @@ class SearchFrom extends React.Component {
 
     createDataObj() {
         const { query, location, radius } = this.state;
-        this.props.onFormSubmit(query, location, radius); 
+        this.props.onFormSubmit(query, location, radius);
         this.setState({ formWasSubmitted: false })
     }
 
