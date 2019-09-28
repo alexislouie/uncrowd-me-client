@@ -12,17 +12,20 @@ export default class Card extends React.Component {
     // }
 
     checkStatus() {
-        const livePercentageAsString = `${this.props.livePercentage}%`
-        const usualPercentageAsString = `${this.props.usualPercentage}%`
-
         const { liveStatus, usualStatus, livePercentage, usualPercentage, openOrClosed } = this.props;
+
         const liveStyling = {
-            background: `linear-gradient(to right, blue ${livePercentage}%, white 50%)`
+            width: '100px',
+            height: '17px',
+            border: '1px solid black',
+            background: `linear-gradient(to right, black, black ${livePercentage}%, white ${livePercentage}%, white 100%)`
         }
         const usualStyling = {
-            background: `linear-gradient(to right, blue ${usualPercentage}%, white 50%)`
+            width: '100px',
+            height: '17px',
+            border: '1px solid black',
+            background: `linear-gradient(to right, black, black ${usualPercentage}%, white ${usualPercentage}%, white 100%)`
         }
-
         if (openOrClosed === 'closed') {
             return (
                 <div>
@@ -39,34 +42,20 @@ export default class Card extends React.Component {
         }
         else if (liveStatus === 'unavailable' && usualStatus) {
             return (
-                <div style={usualStyling}>
+                <div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td className="statusType"><strong>Usual Status</strong></td>
+                                <td>
+                                    <div style={usualStyling}>
+                                    </div>
+                                </td>
+                                <td>{this.props.usualStatus}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                // <div>
-                //     <table>
-                //         <tbody>
-                //             <tr>
-                //                 <td className="statusType"><strong>Usual Status</strong></td>
-                //                 <td>
-                //                     <svg width="100" height="17">
-                //                         <defs>
-                //                             <linearGradient id="colorFill">
-                //                                 <stop offset="0%" stopColor="black" />
-                //                                 <stop offset={usualPercentageAsString} stopColor="black" />
-                //                                 <stop offset={usualPercentageAsString} stopColor="white" />
-                //                                 <stop offset="100%" stopColor="white" />
-                //                             </linearGradient>
-                //                         </defs>
-                //                         <g fill="url(#colorFill)" stroke="black" strokeWidth="2">
-                //                             <rect width="100" height="17" className="statusBar" />
-                //                         </g>
-                //                         Sorry, your browser does not support inline SVG.
-                //                     </svg>
-                //                 </td>
-                //                 <td>{this.props.usualStatus}</td>
-                //             </tr>
-                //         </tbody>
-                //     </table>
-                // </div>
             )
         }
         else {
@@ -76,7 +65,7 @@ export default class Card extends React.Component {
             } else if (this.props.livePercentage > this.props.usualPercentage) {
                 busyStatus = 'busier than usual';
             } else {
-                busyStatus = 'busy as usual'
+                busyStatus = 'busy as usual';
             }
 
             return (
@@ -86,48 +75,22 @@ export default class Card extends React.Component {
                             <tr>
                                 <td className="statusType"><strong>Live Status</strong></td>
                                 <td>
-                                    <svg width="100" height="17">
-                                        <defs>
-                                            <linearGradient id="liveColorFill">
-                                                <stop offset="0%" stopColor="black" />
-                                                <stop offset={livePercentageAsString} stopColor="black" />
-                                                <stop offset={livePercentageAsString} stopColor="white" />
-                                                <stop offset="100%" stopColor="white" />
-                                            </linearGradient>
-                                        </defs>
-                                        <g fill="url(#liveColorFill)" stroke="black" strokeWidth="2">
-                                            <rect width="100" height="17" className="statusBar" />
-                                        </g>
-                                        Sorry, status bar is not supported by your browser.
-                                    </svg>
+                                    <div style={liveStyling}>
+                                    </div>
                                 </td>
                                 <td>{this.props.liveStatus}</td>
                             </tr>
                             <tr>
                                 <td className="statusType"><strong>Usual Status</strong></td>
                                 <td>
-                                    <svg width="100" height="17">
-                                        <defs>
-                                            <linearGradient id="usualColorFill">
-                                                <stop offset="0%" stopColor="black" />
-                                                <stop offset={usualPercentageAsString} stopColor="black" />
-                                                <stop offset={usualPercentageAsString} stopColor="white" />
-                                                <stop offset="100%" stopColor="white" />
-                                            </linearGradient>
-                                        </defs>
-                                        <g fill="url(#usualColorFill)" stroke="black" strokeWidth="2">
-                                            <rect width="100" height="17" className="statusBar" />
-                                        </g>
-                                        Sorry, status bar is not supported by your browser.
-                                    </svg>
+                                    <div style={usualStyling}>
+                                    </div>
                                 </td>
                                 <td>{this.props.usualStatus}</td>
                             </tr>
-                            <tr>
-                                <td>{busyStatus}</td>
-                            </tr>
                         </tbody>
                     </table>
+                    {busyStatus}
                 </div>
             )
         }
@@ -139,7 +102,7 @@ export default class Card extends React.Component {
     render() {
         const { id, hoveredMarkerId, index, name, address, rating, user_ratings, updateHoverId } = this.props;
         const styleHover = {
-            backgroundColor : 'grey',
+            backgroundColor: 'grey',
             color: 'red'
         };
         const cardStyle = {
@@ -147,11 +110,9 @@ export default class Card extends React.Component {
         const style = (id === hoveredMarkerId) ? styleHover : cardStyle;
 
         return (
-            // <div className="card" index={index} style={style} onMouseEnter={this.handleCardHover(id)} onMouseLeave={updateHoverId('')}>
             <div className="card" index={index} style={style} onMouseEnter={() => this.handleCardHover(id)} onMouseLeave={() => this.handleCardHover('')}>
                 <strong>Name: </strong> {name}<br />
                 <strong>Address: </strong>{address}<br />
-                {/* Phone: {this.props.phone}<br /> */}
                 <strong>Rating: </strong>{rating} out of {user_ratings} ratings<br />
                 {this.checkStatus()}
 
