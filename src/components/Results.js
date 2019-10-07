@@ -175,6 +175,7 @@ export default class Results extends Component {
                         updateHoveredMarker={this.handleHoveredMarker.bind(this)}
                         handleMarkerClick={this.handleMarkerClick.bind(this)}
                         infoBoxDetails={clickedMarkerDetails}
+                        clickedMarker={clickedMarkerDetails.key}
                         />
                 </div>
                 <div className="listResults">
