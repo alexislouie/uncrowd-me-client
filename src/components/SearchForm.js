@@ -1,7 +1,6 @@
 import React from 'react';
 import './SearchForm.css'
 import { Route, withRouter } from 'react-router-dom';
-import { API_BASE_URL } from '../config';
 
 class SearchFrom extends React.Component {
     constructor(props) {
@@ -37,6 +36,7 @@ class SearchFrom extends React.Component {
     onSubmit(event) {
         event.preventDefault();
         this.setState({ formWasSubmitted: true });
+
         // this.props.history.push(`/search/${this.state.query}/${this.state.location}`);
 
     }
@@ -58,24 +58,18 @@ class SearchFrom extends React.Component {
         return (
 
             <form>
-                <label>
-                    What are you looking for?
-                    <br />
+                <div>
+                    <label>What are you looking for?</label>
                     <input type="text" name="query" placeholder="cafes, grocery stores, etc"
                         ref={this.queryInput} onChange={this.handleQuery} />
-                </label>
-                <br />
-                <br />
-                <label>
-                    Location:
-                    <br />
-                    <input type="text" name="location" placeholder="address"
+                </div>
+                <div>
+                    <label>Location:</label>
+                    <input type="text" name="location" placeholder="address, city, zip code"
                         ref={this.locationInput} onChange={this.handleLocation} />
-                </label>
-                <br />
-                <br />
+                </div>
 
-                <input onClick={e => this.onSubmit(e)} className="submitButton" type="submit" value="Submit" />
+                <button className="submitButton" onClick={e => this.onSubmit(e)}>Submit</button>
             </form>
         )
     }
