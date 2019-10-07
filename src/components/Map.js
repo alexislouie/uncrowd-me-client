@@ -4,10 +4,6 @@ import MapMarker from './MapMarker';
 import './Results.css';
 import InfoBox from './InfoBox';
 
-const handleApiLoaded = (map, maps) => {
-    // use map and maps objects
-};
-
 export default class GoogleMap extends Component {
     static defaultProps = {
         center: {
@@ -22,8 +18,8 @@ export default class GoogleMap extends Component {
         this.updatehoveredMarkerId = this.updatehoveredMarkerId.bind(this);
     }
 
-    showInfoBox(name, address, lat, lng) {
-        const infoBoxDetails = { name, address, lat, lng };
+    showInfoBox(name, address, lat, lng, key) {
+        const infoBoxDetails = { name, address, lat, lng, key};
         this.props.handleMarkerClick(infoBoxDetails);
     }
 
@@ -32,7 +28,7 @@ export default class GoogleMap extends Component {
     }
 
     render() {
-        const { places, userCoordinates, zoom, hoveredCardId, currentHover, infoBoxDetails } = this.props;
+        const { places, userCoordinates, zoom, hoveredCardId, currentHover, infoBoxDetails, clickedMarker } = this.props;
 
         return (
             <div style={{ height: '100vh', width: '100%' }}>
@@ -65,6 +61,7 @@ export default class GoogleMap extends Component {
                             currentHover={currentHover}
                             updateHoveredMarker={this.updatehoveredMarkerId.bind(this)}
                             showInfoBox={this.showInfoBox.bind(this)}
+                            clickedMarker={clickedMarker}
                         />
                     ))}
 
