@@ -38,7 +38,6 @@ export default class GoogleMap extends Component {
                     defaultZoom={zoom}
                     yesIWantToUseGoogleMapApiInternals={true}
                     onChildClick={this.handleMarkerClick}
-                    onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                 >
 
                     <MapMarker
