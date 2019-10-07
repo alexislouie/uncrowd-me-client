@@ -3,19 +3,23 @@
 
 * {
     box-sizing: border-box;
+}
+
+html {
     background-color: lightblue;
     color: white;
 }
 
 .home {
     margin-top: 250px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .homePage {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 200px;
     margin-left: 30px;
     font-family: Roboto Slab, serif;
 }
@@ -61,16 +65,15 @@
 } */
 .about {
     font-family: Open Sans, serif;
-    margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
-    width: 1000px;
+    width: 60%;
     animation: rise 1s;
     animation-delay: 0.5s;
     animation-fill-mode: backwards; 
 }
 
-h1 {
+.homePage h1 {
     font-size: 45pt;
     animation: expand 1s;
 }
@@ -106,6 +109,34 @@ h1 {
     }
 }
 
+/* @keyframes fade {
+    0% {
+        opacity: 100;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+} */
+/* @keyframes fade-exit {
+    0% {
+        opacity: 100;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+} */
+.fade-exit {
+    opacity: 0;
+    z-index: 1;
+  }
+  .fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 250ms ease-in;
+  }
 
 h2 {
     font-family: Roboto Slab, serif;
