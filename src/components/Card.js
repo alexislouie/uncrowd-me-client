@@ -102,8 +102,9 @@ export default class Card extends React.Component {
     render() {
         const { id, hoveredMarkerId, index, name, address, rating, user_ratings, updateHoverId } = this.props;
         const styleHover = {
-            backgroundColor: 'grey',
-            color: 'red'
+            // backgroundColor: 'grey',
+            // color: '',
+            boxShadow: '2px 2px 5px black'
         };
         const cardStyle = {
         };
