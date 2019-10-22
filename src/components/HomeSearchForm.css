@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+    box-sizing: border-box;
+}
+
+.homeSearchForm {
+    display: flex;
+    justify-content: center;
+}
+
+label {
+    display: block;
+    font-family: Roboto Slab, serif;
+    animation: rise 1s;
+}
+
+input {
+    background-color: white;
+    width: 300px;
+    height: 30px;
+    margin-top: 5px;
+    margin-right: 5px;
+    animation: rise 1s;
+    animation-delay: 200;
+    animation-fill-mode: backwards; 
+}
+
+input::placeholder {
+    padding-left: 5px;
+}
+
+.submitButton {
+    margin-top: 25px;
+    margin-left: 5px;
+    display: flex;
+    align-content: center;
+    width: 50px;
+    animation: rise 1s;
+    animation-delay: 200;
+    animation-fill-mode: backwards; 
+}
+
+.submitButton:hover {
+    background-color: gold;
+} 
+
+.clicked {
+    animation: reposition 1s;
+    animation-fill-mode: forwards;
+}
+
+.fadeOut {
+    animation: fadeOut 1s;
+}
+
+@keyframes reposition {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-480px) translateY(-250px);
+    }
+}
+
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes rise {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 100;
+        transform: translateY(0px);
+    }
+}
