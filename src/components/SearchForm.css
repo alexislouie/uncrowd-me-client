@@ -5,10 +5,10 @@
     box-sizing: border-box;
 }
 
-form {
+.searchForm {
     display: flex;
     justify-content: center;
-    margin-top: 300px;
+    /* margin-top: 300px; */
 }
 
 label {
