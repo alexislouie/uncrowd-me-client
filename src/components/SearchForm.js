@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './SearchForm.css'
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Link } from 'react-router-dom';
 
-class SearchFrom extends React.Component {
+class SearchFrom extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,7 +10,7 @@ class SearchFrom extends React.Component {
             location: '',
             radius: '',
             formWasSubmitted: false,
-            results: [],
+            results: []
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -49,27 +49,24 @@ class SearchFrom extends React.Component {
         event.preventDefault();
         this.setState({ location: event.target.value });
     }
-    // handleRadius(event) {
-    //     event.preventDefault();
-    //     this.setState({ radius: event.target.value });
-    // }
 
     render() {
+        const { query, location } = this.props;
         return (
 
-            <form>
+            <form className="searchForm">
                 <div>
                     <label>What are you looking for?</label>
-                    <input type="text" name="query" placeholder="cafes, grocery stores, etc"
+                    <input type="text" name="query" placeholder={query}
                         ref={this.queryInput} onChange={this.handleQuery} />
                 </div>
                 <div>
                     <label>Location:</label>
-                    <input type="text" name="location" placeholder="address, city, zip code"
+                    <input type="text" name="location" placeholder={location}
                         ref={this.locationInput} onChange={this.handleLocation} />
                 </div>
 
-                <button className="submitButton" onClick={e => this.onSubmit(e)}>Submit</button>
+                <Link to="/search"><button className="submitButton" onClick={e => this.onSubmit(e)}>Submit</button></Link>
             </form>
         )
     }
