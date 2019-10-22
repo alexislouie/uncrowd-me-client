@@ -10,7 +10,7 @@ export default class GoogleMap extends Component {
             lat: 40.7831,
             lng: -73.9712
         },
-        zoom: 13
+        zoom: 14
     };
 
     constructor() {
