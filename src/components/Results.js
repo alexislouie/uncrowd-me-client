@@ -160,7 +160,7 @@ export default class Results extends Component {
 
         const placesAsDomElements = places.map((place, index) =>
             <li key={index}>
-                <Card {...place} hoveredMarkerId={hoveredMarkerId} updateHoverId={this.handleHoveredCard.bind(this)} index={index}/>
+                <Card {...place} hoveredMarkerId={hoveredMarkerId} updateHoverId={this.handleHoveredCard.bind(this)} updateClicked={this.handleMarkerClick.bind(this)} index={index}/>
             </li>
         );
 
@@ -175,7 +175,7 @@ export default class Results extends Component {
                         updateHoveredMarker={this.handleHoveredMarker.bind(this)}
                         handleMarkerClick={this.handleMarkerClick.bind(this)}
                         infoBoxDetails={clickedMarkerDetails}
-                        clickedMarker={clickedMarkerDetails.key}
+                        clickedMarker={clickedMarkerDetails.id}
                         />
                 </div>
                 <div className="listResults">

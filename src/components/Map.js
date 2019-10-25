@@ -19,7 +19,7 @@ export default class GoogleMap extends Component {
     }
 
     showInfoBox(name, address, lat, lng, key) {
-        const infoBoxDetails = { name, address, lat, lng, key};
+        const infoBoxDetails = { name, address, lat, lng, id: key};
         this.props.handleMarkerClick(infoBoxDetails);
     }
 
