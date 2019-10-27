@@ -7,7 +7,7 @@ export default function InfoBox(props) {
 
     return (
         <div className="infoBox" style={style}>
-            {name}<br />
+            <b>{name}</b><br />
             {address}
         </div>
     )
