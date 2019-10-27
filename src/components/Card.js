@@ -101,26 +101,28 @@ export default class Card extends React.Component {
     }
 
     handleClick(name, address, lat, lng, id) {
-        const clickedCardDetails = { name, address, lat, lng, id};
-        this.props.updateClicked(clickedCardDetails);
+        const clickedCardDetails = { name, address, lat, lng, id };
+        if (this.props.clickedCard.id === this.props.id) {
+            this.props.updateClicked({});
+        } else {
+            this.props.updateClicked(clickedCardDetails);
+        }
+        // this.props.updateClicked(clickedCardDetails);
     }
     render() {
-        const { id, hoveredMarkerId, index, name, address, rating, user_ratings, lat, lng, updateHoverId } = this.props;
+        const { id, hoveredMarkerId, index, name, address, rating, user_ratings, lat, lng } = this.props;
         const styleHover = {
-            // backgroundColor: 'grey',
-            // color: '',
             boxShadow: '2px 2px 5px black'
         };
         const cardStyle = {
         };
         const style = (id === hoveredMarkerId) ? styleHover : cardStyle;
-
         return (
-            <div className="card" 
-                index={index} 
-                style={style} 
-                onMouseEnter={() => this.handleCardHover(id)} 
-                onMouseLeave={() => this.handleCardHover('')} 
+            <div className="card"
+                index={index}
+                style={style}
+                onMouseEnter={() => this.handleCardHover(id)}
+                onMouseLeave={() => this.handleCardHover('')}
                 onClick={() => this.handleClick(name, address, lat, lng, id)}>
                 <strong>Name: </strong> {name}<br />
                 <strong>Address: </strong>{address}<br />

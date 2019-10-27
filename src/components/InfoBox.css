@@ -6,24 +6,3 @@
     margin-top: -75px;
     margin-left: -3px;
 }
-
-.hide {
-    display: hide;
-    /* animation: hide 1s; */
-}
-
-.show {
-    /* animation: show 1s; */
-}
-
-@keyframes hide {
-    100% {
-        opacity: 0;
-    }
-}
-
-@keyframes show {
-    100% { 
-        opacity: 100;
-    }
-}
