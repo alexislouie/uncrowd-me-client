@@ -25,11 +25,20 @@
 }
 
 .userPin {
-    fill: green;
+    fill: rgb(100, 11, 117);
 }
 
-.placePin {
-    fill: blue;
+.notBusy {
+  fill: green;
+}
+.aLittleBusy {
+  fill: orange;
+}
+.reallyBusy {
+  fill: red;
+}
+.unavailable {
+  fill: grey;
 }
 
 .jump {

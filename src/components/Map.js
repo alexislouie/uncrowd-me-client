@@ -18,9 +18,15 @@ export default class GoogleMap extends Component {
         this.updatehoveredMarkerId = this.updatehoveredMarkerId.bind(this);
     }
 
-    showInfoBox(name, address, lat, lng, key) {
-        const infoBoxDetails = { name, address, lat, lng, id: key};
-        this.props.handleMarkerClick(infoBoxDetails);
+    updateClickedMarkerDetails(name, address, lat, lng, key) {
+        if (!name) {
+            this.props.handleMarkerClick({});
+        } else {
+            const infoBoxDetails = { name, address, lat, lng, id: key };
+            this.props.handleMarkerClick(infoBoxDetails);
+        }
+        // const infoBoxDetails = { name, address, lat, lng, id: key, hidden };
+        // this.props.handleMarkerClick(infoBoxDetails);
     }
 
     updatehoveredMarkerId(value) {
@@ -37,7 +43,6 @@ export default class GoogleMap extends Component {
                     defaultCenter={userCoordinates}
                     defaultZoom={zoom}
                     yesIWantToUseGoogleMapApiInternals={true}
-                    onChildClick={this.handleMarkerClick}
                 >
 
                     <MapMarker
@@ -55,17 +60,21 @@ export default class GoogleMap extends Component {
                             address={place.address}
                             lat={place.lat}
                             lng={place.lng}
+                            livePercentage={place.livePercentage}
+                            liveStatus={place.liveStatus}
+                            usualPercentage={place.usualPercentage}
+                            usualStatus={place.usualStatus}
                             index={index}
                             hoveredCardId={hoveredCardId}
                             currentHover={currentHover}
                             updateHoveredMarker={this.updatehoveredMarkerId.bind(this)}
-                            showInfoBox={this.showInfoBox.bind(this)}
+                            updateClickedMarkerDetails={this.updateClickedMarkerDetails.bind(this)}
                             clickedMarker={clickedMarker}
                         />
                     ))}
 
-                        <InfoBox {...infoBoxDetails} />
-                        
+                    <InfoBox {...infoBoxDetails} />
+
                 </GoogleMapReact>
             </div>
         );

@@ -148,7 +148,6 @@ export default class Results extends Component {
         }
     }
 
-
     render() {
         const { places, hoveredMarkerId, hoveredCardId, clickedMarkerDetails } = this.state;
         const { userCoordinates } = this.props.results;
