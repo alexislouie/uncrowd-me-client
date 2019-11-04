@@ -29,13 +29,13 @@
 }
 
 .notBusy {
-  fill: green;
+  fill: #4fc05e;
 }
 .aLittleBusy {
-  fill: orange;
+  fill: #fc3;
 }
 .reallyBusy {
-  fill: red;
+  fill: #f9461c;
 }
 .unavailable {
   fill: grey;
@@ -43,7 +43,7 @@
 
 
 .selected {
-  fill: gold;
+  fill: #336;
 }
 
 .jump {
@@ -65,10 +65,5 @@
     }
     80% {
       transform: translateY(0px) scale(1, 1)
-  
     }
-    /* 100%{
-      transform: translateY(0px) 
-  
-    } */
   }
