@@ -18,9 +18,6 @@ export default function App(props) {
             <Route render={({ location }) => (
 
                 <div className="app">
-                    <header>
-                        <h1><Link to="/">Uncrowd Me</Link></h1>
-                    </header>
                     <main>
                         <TransitionGroup>
                             <CSSTransition
