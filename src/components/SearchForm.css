@@ -8,48 +8,45 @@
 .searchForm {
     display: flex;
     justify-content: center;
-    /* margin-top: 300px; */
 }
 
-label {
-    display: block;
+.searchForm label {
     font-family: Roboto Slab, serif;
-    animation: rise 1s;
+    font-size: 14pt;
+    display: block;
 }
 
-input {
+.searchForm input {
     background-color: white;
-    width: 300px;
+    border: 0px;
+    font-size: 14pt;
+    padding: 5px;
+    width: 400px;
     height: 30px;
     margin-top: 5px;
-    margin-right: 5px;
-    animation: rise 1s;
-    animation-delay: 200;
-    animation-fill-mode: backwards; 
 }
 
 input::placeholder {
     padding-left: 5px;
 }
 
-.submitButton {
+.searchForm .submitButton {
     border: 0px;
     background: rgb(28, 46, 122);
     color: white;
-    margin-top: 33px;
-    margin-left: 5px;
-    width: 50px;
-    height: 40px;
+    margin-top: 30px;
+    width: 40px;
+    height: 30px;
     animation: rise 1s;
     animation-delay: 200;
     animation-fill-mode: backwards; 
 }
-.submitButton:hover {
+.searchForm .submitButton:hover {
     background-color: #eb4715;
     text-decoration: none;
 } 
 img {
-    margin: auto;
+    margin: 2px auto;
 }
 
 .clicked {
