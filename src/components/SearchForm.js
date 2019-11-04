@@ -36,9 +36,7 @@ class SearchFrom extends Component {
     onSubmit(event) {
         event.preventDefault();
         this.setState({ formWasSubmitted: true });
-
         // this.props.history.push(`/search/${this.state.query}/${this.state.location}`);
-
     }
 
     handleQuery(event) {
@@ -57,16 +55,14 @@ class SearchFrom extends Component {
             <form className="searchForm">
                 <div>
                     <label>What are you looking for?</label>
-                    <input type="text" name="query" placeholder={query}
-                        ref={this.queryInput} onChange={this.handleQuery} />
+                    <input type="text" name="query" placeholder="cafe, grocery store, etc." onChange={this.handleQuery} />
                 </div>
                 <div>
                     <label>Location:</label>
-                    <input type="text" name="location" placeholder={location}
-                        ref={this.locationInput} onChange={this.handleLocation} />
+                    <input type="text" name="location" placeholder="address, city, or zip code" onChange={this.handleLocation} />
                 </div>
 
-                <Link to="/search"><button className="submitButton" onClick={e => this.onSubmit(e)}>Submit</button></Link>
+                <Link to="/search"><button className="submitButton" onClick={e => this.onSubmit(e)}><img width="24px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Antu_document-edit-verify.svg/512px-Antu_document-edit-verify.svg.png" /></button></Link>
             </form>
         )
     }
