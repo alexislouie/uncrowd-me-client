@@ -34,7 +34,8 @@ export default class HomeSearchFrom extends Component {
                     <input type="text" name="location" placeholder="address, city, zip code"
                         ref={this.locationInput} onChange={this.handleLocation} />
                 </div>
-                <Link to="/search"><button className="submitButton">Submit</button></Link>
+                <Link to="/search"><button className="submitButton">
+                <img width="24px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Antu_document-edit-verify.svg/512px-Antu_document-edit-verify.svg.png" /></button></Link>
             </form>
         )
     }
