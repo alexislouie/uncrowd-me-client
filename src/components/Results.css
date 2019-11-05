@@ -1,6 +1,6 @@
 .results {
     display: flex;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .googleMap {
@@ -12,6 +12,14 @@
 .listResults {
     height: 100vh;
     overflow-y: auto;
+    width: 39%;
+}
+
+ul {
+    margin-top: 0px;
+    margin-left: 20px;
+    padding: 0px;
+    list-style-type: none;
 }
 /* 
 when smaller, googleMap and listResults should be 100% width 
