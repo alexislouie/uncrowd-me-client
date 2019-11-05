@@ -28,3 +28,7 @@ strong {
 .statusType {
     width: 132px;
 }
+
+table {
+    margin-left: -2px;
+}
