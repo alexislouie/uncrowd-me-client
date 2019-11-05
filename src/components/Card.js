@@ -124,7 +124,7 @@ export default class Card extends React.Component {
                 onMouseEnter={() => this.handleCardHover(id)}
                 onMouseLeave={() => this.handleCardHover('')}
                 onClick={() => this.handleClick(name, address, lat, lng, id)}>
-                <strong>Name: </strong> {name}<br />
+                <strong>{name}</strong><br />
                 <strong>Address: </strong>{address}<br />
                 <strong>Rating: </strong>{rating} out of {user_ratings} ratings<br />
                 {this.checkStatus()}
