@@ -11,40 +11,53 @@
 }
 
 label {
-    display: block;
     font-family: Roboto Slab, serif;
+    font-size: 16pt;
+    display: block;
     animation: rise 1s;
 }
 
-input {
+.homeSearchForm {
+    display: flex; 
+    align-items: center;
+}
+
+.homeSearchForm input {
     background-color: white;
-    width: 300px;
-    height: 30px;
+    border: 0px;
+    font-size: 18pt;
+    padding: 5px;
+    width: 600px;
+    height: 40px;
     margin-top: 5px;
-    margin-right: 5px;
+    margin-right: 7px;
     animation: rise 1s;
     animation-delay: 200;
     animation-fill-mode: backwards; 
 }
 
-input::placeholder {
+.homeSearchForm input::placeholder {
     padding-left: 5px;
 }
 
-.submitButton {
-    margin-top: 25px;
-    margin-left: 5px;
-    display: flex;
-    align-content: center;
+.homeSearchForm .submitButton {
+    border: 0px;
+    background: rgb(28, 46, 122);
+    color: white;
+    margin-top: 33px;
     width: 50px;
+    height: 40px;
     animation: rise 1s;
     animation-delay: 200;
     animation-fill-mode: backwards; 
 }
-
-.submitButton:hover {
-    background-color: gold;
+.homeSearchForm .submitButton:hover {
+    background-color: #eb4715;
+    text-decoration: none;
 } 
+.homeSearchForm img {
+    margin: 2px auto auto auto;
+}
 
 .clicked {
     animation: reposition 1s;
