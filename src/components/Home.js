@@ -8,9 +8,9 @@ export default class Home extends Component {
         loader.classList.add('loader--hide');
         
         return (
-            <div className="home">
+            <div className="homePage">
                 <main>
-                    <div className="homePage">
+                    <div className="welcomeScreen">
                         <div className="logo">
                             <svg className="svgLogo" data-name="Layer 1" viewBox="0 0 425.99 452.1" xmlns="http://www.w3.org/2000/svg">
                                 <circle className="cls-1" cx="191" cy="222.18" r="191" />

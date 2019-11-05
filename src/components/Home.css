@@ -6,17 +6,17 @@
 }
 
 html {
-  background-color: rgb(245, 245, 245);
+  background-color: rgb(241, 241, 241);
   color: rgb(36, 42, 44);
 }
 
 .svgLogo {
-  width: 350px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   position: absolute;
   z-index: -1;
-  top: 85px;
-  left: 41%;
+  top: 50px;
+  left: 37%;
   animation: expand 1s;
 }
 .cls-1 {
@@ -71,26 +71,27 @@ html {
   stroke: #366;
 }
 
-.home {
-  margin-top: 275px;
+.homePage {
+  margin-top: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.homePage {
+.welcomeScreen {
   display: flex;
   justify-content: center;
-  margin-left: 30px;
+  margin-bottom: 5px;
   font-family: Roboto Slab, serif;
   font-size: 50pt;
 }
 
-.homePage h1 {
-  font-size: 50pt;
+.welcomeScreen h1 {
+  font-size: 58pt;
   color: #336;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  -webkit-animation: expand 1s;
   animation: expand 1s;
-  margin-bottom: 60px;
+  margin-bottom: 5px;
 }
 
 .info {
@@ -99,7 +100,7 @@ html {
   font-family: Open Sans, serif;
   font-size: 18pt;
   font-weight: bolder;
-  margin-top: 300px;
+  margin-top: 350px;
   margin-left: -8px;
   width: 101%;
   height: 650px;
