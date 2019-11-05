@@ -20,6 +20,7 @@
     background-color: white;
     border: 0px;
     font-size: 14pt;
+    margin-right: 7px;
     padding: 5px;
     width: 400px;
     height: 30px;
@@ -37,16 +38,13 @@ input::placeholder {
     margin-top: 30px;
     width: 40px;
     height: 30px;
-    animation: rise 1s;
-    animation-delay: 200;
-    animation-fill-mode: backwards; 
 }
 .searchForm .submitButton:hover {
     background-color: #eb4715;
     text-decoration: none;
 } 
-img {
-    margin: 2px auto;
+.searchForm img {
+    margin: 3px auto auto auto;
 }
 
 .clicked {
