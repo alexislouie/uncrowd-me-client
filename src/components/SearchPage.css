@@ -4,3 +4,10 @@ h1 {
     font-family: Roboto Slab, serif;
     font-size: 20pt;
 }
+
+header {
+    background-color: #73bdb2;
+    width: 100%;
+    padding: 7px;
+    padding-bottom: 30px;
+}
