@@ -11,8 +11,8 @@
     line-height: 130%;
     margin-top: -90px;
     margin-left: -12px;
-    /* animation: growIn 0.75s;
-    transform-origin: bottom; */
+    animation: growIn 0.75s;
+    transform-origin: bottom;
 }
 
 @keyframes growIn {
