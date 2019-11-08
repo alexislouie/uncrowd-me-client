@@ -47,7 +47,6 @@ class SearchFrom extends Component {
     }
 
     render() {
-        // const { query, userLocation } = this.props;
         return (
             <form className="searchForm">
                 <div>

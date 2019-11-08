@@ -25,8 +25,6 @@ export default class GoogleMap extends Component {
             const infoBoxDetails = { name, address, lat, lng, id: key };
             this.props.handleMarkerClick(infoBoxDetails);
         }
-        // const infoBoxDetails = { name, address, lat, lng, id: key, hidden };
-        // this.props.handleMarkerClick(infoBoxDetails);
     }
 
     updatehoveredMarkerId(value) {
