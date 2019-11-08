@@ -71,6 +71,8 @@ export default class MapMarker extends Component {
             } else if (usualStatus === 'closed' || usualStatus === 0) {
                 busyColor = 'unavailable';
             }
+        } else {
+            busyColor = 'unavailable';
         }
 
         if (userLocation) {

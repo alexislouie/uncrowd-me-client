@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { API_BASE_URL } from '../config'
-import Card from './Card';
-import GoogleMap from './Map';
+import React, { Component } from "react";
+import { API_BASE_URL } from "../config";
+import Card from "./Card";
+import GoogleMap from "./Map";
 
 export default class Results extends Component {
     constructor(props) {
         super(props);
         this.state = {
             places: [],
-            hoveredMarkerId: '',
-            hoveredCardId: '',
-            clickedMarkerDetails: {},
+            hoveredMarkerId: "",
+            hoveredCardId: "",
+            clickedMarkerDetails: {}
         };
     }
 
@@ -42,131 +42,143 @@ export default class Results extends Component {
                 lng: place.geometry.location.lng
             };
 
-            fetch(`${API_BASE_URL}/busyHours/${placeId}`,
-                { method: 'GET' })
+            fetch(`${API_BASE_URL}/busyHours/${placeId}`, { method: "GET" })
                 .then(res => {
-                    console.log('making api call');
+                    console.log("making api call");
                     if (!res.ok) {
                         return Promise.reject(res.statusText);
                     }
-                    return res.json()
+                    return res.json();
                 })
                 .then(data => {
                     if (data.message) {
-                        refinedPlaceObj['liveStatus'] = data.message;
-                        refinedPlaceObj['usualStatus'] = data.message;
-                        refinedPlaceObj['livePercentage'] = 0;
-                        refinedPlaceObj['usualPercentage'] = 0;
-
+                        refinedPlaceObj["liveStatus"] = data.message;
+                        refinedPlaceObj["usualStatus"] = data.message;
+                        refinedPlaceObj["livePercentage"] = 0;
+                        refinedPlaceObj["usualPercentage"] = 0;
                     } else {
-                        if (place.opening_hours.open_now === false) {
-                            refinedPlaceObj['openOrClosed'] = 'closed';
-                            refinedPlaceObj['livePercentage'] = 0;
-                            refinedPlaceObj['liveStatus'] = 'closed';
-                            refinedPlaceObj['usualStatus'] = 'closed';
+                        if (!place.opening_hours) {
+                            refinedPlaceObj["livePercentage"] = 0;
+                            refinedPlaceObj["liveStatus"] = "unavailable";
+                            refinedPlaceObj["usualPercentage"] = 0;
+                            refinedPlaceObj["usualStatus"] = "unavailable";
 
                         } else {
-                            // refinedPlaceObj['openOrClosed'] = 'open';
-                            if (data.now) {
-                                const livePercentage = data.now.percentage;
-                                let liveStatus;
-
-                                if (livePercentage <= 50) {
-                                    liveStatus = 'not too busy';
-                                } else if (livePercentage <= 80) {
-                                    liveStatus = 'a little busy';
-                                } else {
-                                    liveStatus = 'as busy as it gets';
-                                }
-
-                                refinedPlaceObj['livePercentage'] = livePercentage;
-                                refinedPlaceObj['liveStatus'] = liveStatus;
+                            if (place.opening_hours.open_now === false) {
+                                refinedPlaceObj["openOrClosed"] = "closed";
+                                refinedPlaceObj["livePercentage"] = 0;
+                                refinedPlaceObj["liveStatus"] = "closed";
+                                refinedPlaceObj["usualStatus"] = "closed";
                             } else {
-                                refinedPlaceObj['livePercentage'] = 0;
-                                refinedPlaceObj['liveStatus'] = 'unavailable';
-                            }
+                                // refinedPlaceObj['openOrClosed'] = 'open';
+                                if (data.now) {
+                                    const livePercentage = data.now.percentage;
+                                    let liveStatus;
 
-                            // Account for Google's popular times including 12 AM to 3 AM in the previous day's data 
-                            const currentDate = new Date();
-                            let currentDay = currentDate.getDay();
-                            const currentHour = currentDate.getHours();
-
-                            if (currentHour === 0 || currentHour === 1 || currentHour === 2 || currentHour === 3) {
-                                currentDay = currentDate.getDay() - 1;
-                                if (currentDay === -1) {
-                                    currentDay = 6;
-                                }
-                            }
-                            const hoursDataForCurrentDay = data.week[currentDay].hours;
-                            if (hoursDataForCurrentDay) {
-                                hoursDataForCurrentDay.forEach(hour => {
-                                    if (hour.hour === currentHour) {
-                                        const usualPercentage = hour.percentage;
-                                        refinedPlaceObj['usualPercentage'] = usualPercentage;
-                                        if (usualPercentage <= 50) {
-                                            refinedPlaceObj['usualStatus'] = 'not too busy';
-                                        } else if (usualPercentage <= 80) {
-                                            refinedPlaceObj['usualStatus'] = 'a little busy';
-                                        } else {
-                                            refinedPlaceObj['usualStatus'] = 'as busy as it gets';
-                                        }
+                                    if (livePercentage <= 50) {
+                                        liveStatus = "not too busy";
+                                    } else if (livePercentage <= 80) {
+                                        liveStatus = "a little busy";
+                                    } else {
+                                        liveStatus = "as busy as it gets";
                                     }
-                                })
-                            } else {
-                                refinedPlaceObj['usualStatus'] = 0;
+
+                                    refinedPlaceObj["livePercentage"] = livePercentage;
+                                    refinedPlaceObj["liveStatus"] = liveStatus;
+                                } else {
+                                    refinedPlaceObj["livePercentage"] = 0;
+                                    refinedPlaceObj["liveStatus"] = "unavailable";
+                                }
+
+                                // Account for Google's popular times including 12 AM to 3 AM in the previous day's data
+                                const currentDate = new Date();
+                                let currentDay = currentDate.getDay();
+                                const currentHour = currentDate.getHours();
+
+                                if (currentHour === 0 || currentHour === 1 || currentHour === 2 || currentHour === 3) {
+                                    currentDay = currentDate.getDay() - 1;
+                                    if (currentDay === -1) {
+                                        currentDay = 6;
+                                    }
+                                }
+                                const hoursDataForCurrentDay = data.week[currentDay].hours;
+                                if (hoursDataForCurrentDay) {
+                                    hoursDataForCurrentDay.forEach(hour => {
+                                        if (hour.hour === currentHour) {
+                                            const usualPercentage = hour.percentage;
+                                            refinedPlaceObj["usualPercentage"] = usualPercentage;
+                                            if (usualPercentage <= 50) {
+                                                refinedPlaceObj["usualStatus"] = "not too busy";
+                                            } else if (usualPercentage <= 80) {
+                                                refinedPlaceObj["usualStatus"] = "a little busy";
+                                            } else {
+                                                refinedPlaceObj["usualStatus"] = "as busy as it gets";
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    refinedPlaceObj["usualStatus"] = "unavailable";
+                                }
                             }
                         }
                     }
                 })
                 .then(() => {
-                    console.log('refinedPlaceObj: ', refinedPlaceObj)
+                    console.log("refinedPlaceObj: ", refinedPlaceObj);
                     places.push(refinedPlaceObj);
 
                     if (places.length === this.props.results.places.length) {
-                        this.setState({ places })
+                        this.setState({ places });
                     }
                 })
-                .then(() => this.props.hideLoader())
+                .then(() => this.props.hideLoader());
         });
     }
 
     handleHoveredMarker(id) {
         if (this.state.hoveredMarkerId !== id) {
-            this.setState({ hoveredMarkerId: id })
+            this.setState({ hoveredMarkerId: id });
         }
     }
 
     handleHoveredCard(hoveredCardId) {
         if (this.state.hoveredCardId !== hoveredCardId) {
-            this.setState({ hoveredCardId })
+            this.setState({ hoveredCardId });
         }
     }
 
     handleMarkerClick(clickedMarkerDetails) {
         if (this.state.clickedMarkerDetails !== clickedMarkerDetails) {
-            this.setState({ clickedMarkerDetails })
+            this.setState({ clickedMarkerDetails });
         }
     }
 
     render() {
-        const { places, hoveredMarkerId, hoveredCardId, clickedMarkerDetails } = this.state;
+        const {
+            places,
+            hoveredMarkerId,
+            hoveredCardId,
+            clickedMarkerDetails
+        } = this.state;
         const { userCoordinates } = this.props.results;
-        console.log('userCoordinates: ', userCoordinates)
+        console.log("userCoordinates: ", userCoordinates);
 
         if (this.state.places.length === 0) {
             return null;
         }
 
-        const placesAsDomElements = places.map((place, index) =>
+        const placesAsDomElements = places.map((place, index) => (
             <li key={index}>
-                <Card {...place}
+                <Card
+                    {...place}
                     hoveredMarkerId={hoveredMarkerId}
                     updateHoverId={this.handleHoveredCard.bind(this)}
-                    updateClicked={this.handleMarkerClick.bind(this)} 
+                    updateClicked={this.handleMarkerClick.bind(this)}
                     clickedCard={clickedMarkerDetails}
-                    index={index} />
+                    index={index}
+                />
             </li>
-        );
+        ));
 
         return (
             <div className="results">
@@ -176,19 +188,18 @@ export default class Results extends Component {
                         userCoordinates={userCoordinates}
                         hoveredCardId={hoveredCardId}
                         currentHover={hoveredMarkerId}
-                        updateHoveredMarker={this.handleHoveredMarker.bind(this)}
+                        updateHoveredMarker={this.handleHoveredMarker.bind(
+                            this
+                        )}
                         handleMarkerClick={this.handleMarkerClick.bind(this)}
                         infoBoxDetails={clickedMarkerDetails}
                         clickedMarker={clickedMarkerDetails.id}
                     />
                 </div>
                 <div className="listResults">
-                    <ul>
-                        {placesAsDomElements}
-                    </ul>
+                    <ul>{placesAsDomElements}</ul>
                 </div>
             </div>
-        )
-
+        );
     }
 }

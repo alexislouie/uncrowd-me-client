@@ -5,6 +5,9 @@
     box-sizing: border-box;
 }
 
+.error {
+    border: red 1px;
+}
 .homeSearchForm {
     display: flex;
     justify-content: center;

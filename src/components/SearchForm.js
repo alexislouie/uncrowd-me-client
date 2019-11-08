@@ -6,8 +6,8 @@ class SearchFrom extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            query: '',
-            location: '',
+            query: this.props.query,
+            location: this.props.userLocation,
             radius: '',
             formWasSubmitted: false,
             results: []
@@ -16,8 +16,6 @@ class SearchFrom extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.handleQuery = this.handleQuery.bind(this);
         this.handleLocation = this.handleLocation.bind(this);
-        // this.handleRadius = this.handleRadius.bind(this);
-
         this.createDataObj = this.createDataObj.bind(this);
     }
 
@@ -49,17 +47,16 @@ class SearchFrom extends Component {
     }
 
     render() {
-        const { query, location } = this.props;
+        // const { query, userLocation } = this.props;
         return (
-
             <form className="searchForm">
                 <div>
                     <label>What are you looking for?</label>
-                    <input type="text" name="query" placeholder="cafe, grocery store, etc." onChange={this.handleQuery} />
+                    <input type="text" name="query" placeholder="cafe, grocery store, etc." value={this.state.query} onChange={this.handleQuery} />
                 </div>
                 <div>
                     <label>Location:</label>
-                    <input type="text" name="location" placeholder="address, city, or zip code" onChange={this.handleLocation} />
+                    <input type="text" name="location" placeholder="address, city, or zip code" value={this.state.location} onChange={this.handleLocation} />
                 </div>
 
                 <Link to="/search"><button className="submitButton" onClick={e => this.onSubmit(e)}><img width="20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Antu_document-edit-verify.svg/512px-Antu_document-edit-verify.svg.png" /></button></Link>
