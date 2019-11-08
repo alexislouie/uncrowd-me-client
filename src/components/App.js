@@ -1,11 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import SearchForm from './SearchForm';
 import SearchPage from './SearchPage';
-import Results from './Results';
 import Home from './Home';
 import './App.css'
-// import LoginPage from './LoginPage';
 import {
     CSSTransition,
     TransitionGroup,
