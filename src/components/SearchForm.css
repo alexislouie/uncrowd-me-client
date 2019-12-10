@@ -8,6 +8,7 @@
 .searchForm {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .searchForm label {
@@ -82,5 +83,32 @@ input::placeholder {
     100% {
         opacity: 100;
         transform: translateY(0px);
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .searchForm label {
+        font-size: 14pt;
+    }
+    .searchForm input {
+        font-size: 16pt;
+        width: 350px;
+        margin-right: 0px;
+    }
+    .searchForm input::placeholder {
+        padding-left: 2px;
+    }
+    .searchForm {
+        margin-bottom: 10px;
+    }
+    .searchForm .submitButton {  
+        width: 350px;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width: 376px){
+    .searchForm input {
+        width: 330px;
     }
 }

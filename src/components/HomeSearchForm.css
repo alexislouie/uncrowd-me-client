@@ -11,6 +11,7 @@
 .homeSearchForm {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .homeSearchForm label {
@@ -18,11 +19,6 @@
     font-size: 16pt;
     display: block;
     animation: rise 1s;
-}
-
-.homeSearchForm {
-    display: flex; 
-    align-items: center;
 }
 
 .homeSearchForm input {
@@ -97,5 +93,37 @@
     100% {
         opacity: 100;
         transform: translateY(0px);
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .homeSearchForm label {
+        font-size: 14pt;
+    }
+    .homeSearchForm input {
+        font-size: 16pt;
+        width: 350px;
+        margin-right: 0px;
+    }
+    .homeSearchForm input::placeholder {
+        padding-left: 2px;
+    }
+    .homeFormInput {
+        margin-bottom: 10px;
+    }
+    .homeSearchForm .submitButton {
+        width: 350px;
+        margin-top: 0px;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width: 376px){
+    .homeSearchForm .submitButton {
+        width: 600px;
+        margin-top: 20px;
+        margin-left: -6px;
+    }
+    .intro {
+        margin-top: 275px;
     }
 }

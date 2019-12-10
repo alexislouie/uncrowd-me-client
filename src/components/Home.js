@@ -11,7 +11,7 @@ export default class Home extends Component {
             <div className="homePage">
                 <main>
                     <div className="welcomeScreen">
-                        <div className="logo">
+                        {/* <div className="logo"> */}
                             <svg className="svgLogo" data-name="Layer 1" viewBox="0 0 425.99 452.1" xmlns="http://www.w3.org/2000/svg">
                                 <circle className="cls-1" cx="191" cy="222.18" r="191" />
                                 <polygon className="cls-2" points="391.14 210.33 337.92 188.28 336.34 238.79 303.9 204.42 274.66 250.05 257.46 192.68 213.53 195.71 239.22 148.14 192.4 120.57 256.48 119.28 224.14 58.62 291.54 103.25 298.86 31.08 321.8 99.53 364.76 65.77 351.31 118.89 422.85 124.26 362.85 158.69" />
@@ -37,23 +37,27 @@ export default class Home extends Component {
                                 <path className="cls-11" transform="translate(-20 -6.82)" d="m230.2 252.14c27.8-15.14 34.19-13.33 43.37-15.23 24.53-5.07-4.44-38.31-11.17-38.4-14.76-0.18-37.22 11.22-64.33 27.74-4.32 2.64-15.54 0.76-23.18 1.16-3.69 0.2 29.27 38.94 55.31 24.73z" />
                                 <path className="cls-13" transform="translate(-20 -6.82)" d="m261.78 198.05" />
                             </svg>
-                        </div>
+                        {/* </div> */}
                         <h1>Uncrowd Me!</h1>
                     </div>
                     <HomeSearchForm />
-                    <div className="info">
-                        <div className="tagline">
-                        <h2>We've all experienced it</h2>
+                    <div className="infobox intro">
+                        <div className="intro-img">
+
+                        </div>
+                        <div className="intro-text">
+                            <h2>We've all experienced it</h2>
                             <p>
                                 The elbow-to-elbow crowds at your favorite grocery store. Long lines wrapping around the block at that restaraunt you're meeting your friends at.
                                 The lack of seating at your local cafe when you just need to get some work done.
                             </p>
-                            
                         </div>
                     </div>
-                    <div className="about">
-                        <h2>Avoid the crowds. Avoid the wait.</h2><br />
-                        Uncrowd Me shows you the closest places with the smallest crowds near you.
+                    <div className="infobox about">
+                        <h2>Avoid the crowds. Avoid the wait.</h2>
+                        <p>
+                            Uncrowd Me shows you the closest places with the smallest crowds near you.
+                        </p>
                     </div>
                 </main>
             </div >

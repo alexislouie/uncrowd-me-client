@@ -16,7 +16,8 @@ html {
   position: absolute;
   z-index: -1;
   top: 50px;
-  left: 37%;
+  margin-left: 2%;
+  margin-right: auto;
   animation: expand 1s;
 }
 .cls-1 {
@@ -76,7 +77,9 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
+
 .welcomeScreen {
   display: flex;
   justify-content: center;
@@ -94,27 +97,6 @@ html {
   margin-bottom: 5px;
 }
 
-.info {
-  background-color: #73bdb2;
-  color: white;
-  font-family: Open Sans, serif;
-  font-size: 18pt;
-  font-weight: bolder;
-  margin-top: 350px;
-  margin-left: -8px;
-  width: 101%;
-  height: 650px;
-  animation: rise 1s;
-  animation-delay: 0.5s;
-  animation-fill-mode: backwards;
-}
-
-.tagline {
-  padding-top: 150px;
-  margin-left: 50%;
-  width: 45%;
-}
-
 h2 {
   margin-bottom: 0px;
   font-size: 32pt;
@@ -122,18 +104,39 @@ h2 {
   letter-spacing: 1px;
 }
 
+.infobox {
+  margin-right: auto;
+  padding: 100px 200px 100px 200px;
+  animation: rise 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+
+
+.intro {
+  background-color: #73bdb2;
+  color: white;
+  font-family: Open Sans, serif;
+  font-size: 18pt;
+  font-weight: bolder;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 350px;
+  height: 650px;
+}
+.intro-img {
+  width: 50%;
+}
+.intro-text {
+  width: 50%;
+}
+
 .about {
   background-color: #eb4715;
   color: rgb(28, 28, 87);
   font-family: Open Sans, serif;
   font-size: 22pt;
-  margin-left: -8px;
-  margin-right: auto;
-  width: 101%;
-  padding: 100px 200px 100px 200px;
-  animation: rise 1s;
-  animation-delay: 0.5s;
-  animation-fill-mode: backwards;
 }
 
 
@@ -199,4 +202,45 @@ h2 {
 
 h2 {
   font-family: Roboto Slab, serif;
+}
+
+@media screen and (max-width: 768px) and (min-width: 376px){
+  .intro {
+    margin-top: 275px;
+    display: flex;
+    align-items: center;
+  }
+
+  .infobox {
+    padding: 50px 20px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .svgLogo {
+    height: 300px;
+  }
+  .welcomeScreen h1 {
+    font-size: 36pt;
+    margin-top: -20px;
+    margin-bottom: 20px;
+  }
+  .info {
+    margin-top: 100px;
+  }
+  h2 {
+    font-size: 20pt;
+    line-height: 27pt;
+  }
+  p {
+    font-size: 16pt;
+  }
+  .infobox {
+    padding: 20px;
+  }
+  .intro-img {
+    width: 100%;
+  }.intro-text {
+    width: 100%;
+  }
 }

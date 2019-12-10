@@ -32,3 +32,17 @@ strong {
 table {
     margin-left: -2px;
 }
+
+
+@media screen and (max-width: 375px) {
+    .listResults {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width: 376px){
+    .listResults {
+        width: 65%;
+    }
+}

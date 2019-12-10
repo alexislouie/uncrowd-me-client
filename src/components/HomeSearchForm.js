@@ -13,13 +13,6 @@ export default class HomeSearchFrom extends Component {
         this.handleLocation = this.handleLocation.bind(this);
     }
 
-    componentDidMount() {
-        console.log('query: ', this.state.query)
-        console.log('type of query: ', typeof this.state.query)
-        console.log('location: ', this.state.location)
-        console.log('type of location: ', typeof this.state.location)
-    }
-
     handleQuery(event) {
         event.preventDefault();
         this.setState({ query: event.target.value });
@@ -40,7 +33,7 @@ export default class HomeSearchFrom extends Component {
 
         return (
             <form className="homeSearchForm">
-                <div>
+                <div className="homeFormInput">
                     <label>What are you looking for?</label>
                     <input
                         type="text"
@@ -50,7 +43,7 @@ export default class HomeSearchFrom extends Component {
                         onChange={this.handleQuery}
                     />
                 </div>
-                <div>
+                <div className="homeFormInput">
                     <label>Location:</label>
                     <input
                         type="text"

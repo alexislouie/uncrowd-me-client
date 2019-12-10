@@ -43,7 +43,6 @@ export default class Results extends Component {
 
             fetch(`${API_BASE_URL}/busyHours/${placeId}`, { method: "GET" })
                 .then(res => {
-                    console.log("making api call");
                     if (!res.ok) {
                         return Promise.reject(res.statusText);
                     }
@@ -123,7 +122,6 @@ export default class Results extends Component {
                     }
                 })
                 .then(() => {
-                    console.log("refinedPlaceObj: ", refinedPlaceObj);
                     places.push(refinedPlaceObj);
 
                     if (places.length === this.props.results.places.length) {

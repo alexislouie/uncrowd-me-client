@@ -4,9 +4,9 @@
 }
 
 .googleMap {
-    /* display: inline-block; */
     position: sticky;
     flex-basis: 60%;
+    padding: 0px 1%;
 }
 
 .listResults {
@@ -17,11 +17,15 @@
 
 ul {
     margin-top: 0px;
-    margin-left: 20px;
     padding: 0px;
     list-style-type: none;
 }
-/* 
-when smaller, googleMap and listResults should be 100% width 
-and maps should be a much smaller height 
-*/
+
+@media screen and (max-width: 375px) {
+    .results {
+        margin-top: 10px;
+    }
+    .googleMap {
+        display: none;
+    }
+}

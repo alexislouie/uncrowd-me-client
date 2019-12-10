@@ -58,7 +58,11 @@ class SearchFrom extends Component {
                     <input type="text" name="location" placeholder="address, city, or zip code" value={this.state.location} onChange={this.handleLocation} />
                 </div>
 
-                <Link to="/search"><button className="submitButton" onClick={e => this.onSubmit(e)}><img width="20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Antu_document-edit-verify.svg/512px-Antu_document-edit-verify.svg.png" /></button></Link>
+                <Link to="/search">
+                    <button className="submitButton" onClick={e => this.onSubmit(e)}>
+                        <img width="20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Antu_document-edit-verify.svg/512px-Antu_document-edit-verify.svg.png" />
+                    </button>
+                </Link>
             </form>
         )
     }
