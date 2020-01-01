@@ -106,7 +106,7 @@ h2 {
 
 .infobox {
   margin-right: auto;
-  padding: 100px 200px 100px 200px;
+  padding: 100px 100px 100px 100px;
   animation: rise 1s;
   animation-delay: 0.5s;
   animation-fill-mode: backwards;
@@ -118,7 +118,6 @@ h2 {
   color: white;
   font-family: Open Sans, serif;
   font-size: 18pt;
-  font-weight: bolder;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -126,7 +125,8 @@ h2 {
   height: 650px;
 }
 .intro-img {
-  width: 50%;
+  object-fit: contain;
+  width: 45%;
 }
 .intro-text {
   width: 50%;
@@ -171,26 +171,6 @@ h2 {
   }
 }
 
-/* @keyframes fade {
-    0% {
-        opacity: 100;
-        transform: translateY(0px);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-} */
-/* @keyframes fade-exit {
-    0% {
-        opacity: 100;
-        transform: translateY(0px);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-} */
 .fade-exit {
   opacity: 0;
   z-index: 1;
@@ -240,7 +220,8 @@ h2 {
   }
   .intro-img {
     width: 100%;
-  }.intro-text {
+  }
+  .intro-text {
     width: 100%;
   }
 }

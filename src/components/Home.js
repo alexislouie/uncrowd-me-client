@@ -42,9 +42,7 @@ export default class Home extends Component {
                     </div>
                     <HomeSearchForm />
                     <div className="infobox intro">
-                        <div className="intro-img">
-
-                        </div>
+                        <img src={require('../line.png')} className="intro-img" alt="angry-rhino-waiting-in-line" />
                         <div className="intro-text">
                             <h2>We've all experienced it</h2>
                             <p>
