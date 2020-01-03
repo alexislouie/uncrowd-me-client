@@ -119,8 +119,9 @@ h2 {
   font-family: Open Sans, serif;
   font-size: 18pt;
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
   margin-top: 350px;
   height: 650px;
 }
