@@ -1,68 +1,46 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Uncrowd Me
+=================
+Uncrowd Me shows users the least crowded places near by so they can avoid crowds and long lines.
 
-## Available Scripts
+Background
+----------
+We've all experienced it. The elbow-to-elbow crowds at your favorite grocery store. Long lines wrapping around the block at that restaraunt you're meeting your friends at. The lack of seating at your local cafe when you just need to get some work done. 
 
-In the project directory, you can run:
+Uncrowd Me allows users to search places ahead of time so they never have to wait in line again. 
 
-### `npm start`
+Screenshots 
+-----------
+Home Page:
+![image of home screen](/public/images/home.png)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Search Page: 
+![image of login page section](/public/images/search.png)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
-### `npm test`
+Summary
+-------
+- Users search for the type of place they're looking for (e.g. restaurants, grocery stores, cafes) and enter their location 
+- The app displays a map and list of locations nearby 
+- Each place marked on the map is color coded according to how busy the place is: red for very busy, yellow for moderately busy, green for not busy, grey for closed or if data is not available
+- Map markers can be clicked to display more information about the place 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Demo
+----
+- [Uncrowd Me Live Demo](https://uncrowd-me.herokuapp.com/)
 
-### `npm run build`
+Tech Stack
+----------
+- React.js
+- Node.js/Express.js
+- HTML5
+- CSS3
+- Heroku
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Design 
+------
+- Adobe Illustrator 
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Author
+------
+- **Alexis Louie** 
