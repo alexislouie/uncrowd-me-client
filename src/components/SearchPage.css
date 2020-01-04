@@ -5,9 +5,16 @@ h1 {
     font-size: 20pt;
 }
 
+.homeLink {
+    width: 5%;
+    margin-right: 12px;
+}
+
 header {
     background-color: #73bdb2;
     width: 100%;
-    padding: 7px;
-    padding-bottom: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
