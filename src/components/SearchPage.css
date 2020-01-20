@@ -18,3 +18,9 @@ header {
     justify-content: center;
     align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+    .homeLink {
+        display: none;
+    }
+}
