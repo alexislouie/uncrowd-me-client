@@ -14,11 +14,8 @@ export default class Results extends Component {
         };
     }
 
-    componentDidMount() {
-        this.props.hideLoader();
-    }
-
     componentDidUpdate(prevProps, prevState) {
+        this.props.hideLoader();
         if (this.props.results !== prevProps.results) {
             this.fetchBusyHours();
         }
@@ -158,7 +155,6 @@ export default class Results extends Component {
             clickedMarkerDetails
         } = this.state;
         const { userCoordinates } = this.props.results;
-        console.log("userCoordinates: ", userCoordinates);
 
         if (this.state.places.length === 0) {
             return null;
