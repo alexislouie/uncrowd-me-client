@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SearchForm from "./SearchForm";
 import Results from "./Results";
+import Loader from "./Loader";
 import "./SearchPage.css";
 import { API_BASE_URL } from "../config";
-const loader = document.querySelector(".loader");
-
-const showLoader = () => loader.classList.remove("loader--hide");
-const hideLoader = () => loader.classList.add("loader--hide");
 
 export default class SearchPage extends Component {
    constructor(props) {
@@ -15,7 +12,8 @@ export default class SearchPage extends Component {
       this.state = {
          query: (localStorage.query === '') ? "Fun Places" : localStorage.getItem("query"),
          location: (localStorage.location === '') ? "New York, NY" : localStorage.getItem("location"),
-         results: []
+         showLoader: true,
+         results: {}
       };
    }
    componentDidMount() {
@@ -23,7 +21,16 @@ export default class SearchPage extends Component {
       this.fetchResults(query, location);
    }
 
+   toggleLoader(toggle) {
+      console.log('toggleLoader has been called')
+      if(this.state.showLoader !== toggle) {
+         console.log('this.state.showLoader is being toggled to: ', toggle)
+         this.setState({ showLoader: toggle })
+      }
+   }
+
    fetchResults(query, location) {
+      this.toggleLoader(true);
       fetch(`${API_BASE_URL}/findPlaces?query=${query}&location=${location}&radius=1600&opennow=true`,
           { method: 'GET' })
           .then(res => {
@@ -33,15 +40,18 @@ export default class SearchPage extends Component {
               return res.json();
           })
           .then(data => {
-            this.setState({ results: data, query, location });
+            this.setState({ 
+               results: data,
+               query,
+               location 
+            });
             localStorage.setItem('query', '');
             localStorage.setItem('location', '');
           })
-
    }
 
    render() {
-      const { query, location, results } = this.state;
+      const { query, location, results, showLoader } = this.state;
 
       return (
          <div className="searchPage">
@@ -82,10 +92,9 @@ export default class SearchPage extends Component {
                   }}
                />
             </header>
-
+            <Loader showLoader={showLoader}/>
             <Results
-               hideLoader={hideLoader}
-               showLoader={showLoader}
+               showLoader={this.toggleLoader.bind(this)}
                results={results}
             />
          </div>
