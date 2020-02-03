@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './SearchForm.css'
 import { Route, withRouter, Link } from 'react-router-dom';
 
-class SearchFrom extends Component {
+export default class SearchFrom extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,8 +14,8 @@ class SearchFrom extends Component {
         };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.handleQuery = this.handleQuery.bind(this);
-        this.handleLocation = this.handleLocation.bind(this);
+        // this.handleQuery = this.handleQuery.bind(this);
+        // this.handleLocation = this.handleLocation.bind(this);
         this.createDataObj = this.createDataObj.bind(this);
     }
 
@@ -33,29 +33,36 @@ class SearchFrom extends Component {
 
     onSubmit(event) {
         event.preventDefault();
+        const { query, location } = this.state;
+        if (query === '' || !query) {
+            this.setState({ query: 'New Places' });
+        } 
+        if (location === '' || !location) {
+            this.setState({ location: 'New York, NY' });
+        }
         this.setState({ formWasSubmitted: true });
-        // this.props.history.push(`/search/${this.state.query}/${this.state.location}`);
     }
 
-    handleQuery(event) {
-        event.preventDefault();
-        this.setState({ query: event.target.value });
-    }
-    handleLocation(event) {
-        event.preventDefault();
-        this.setState({ location: event.target.value });
-    }
+    // handleQuery(event) {
+    //     event.preventDefault();
+    //     this.setState({ query: event.target.value });
+    // }
+    
+    // handleLocation(event) {
+    //     event.preventDefault();
+    //     this.setState({ location: event.target.value });
+    // }
 
     render() {
         return (
             <form className="searchForm">
                 <div>
                     <label>What are you looking for?</label>
-                    <input type="text" name="query" placeholder="cafe, grocery store, etc." value={this.state.query} onChange={this.handleQuery} />
+                    <input type="text" name="query" placeholder="cafe, grocery store, etc." value={this.state.query} onChange={e => { this.setState({ query: e.target.value })}} />
                 </div>
                 <div>
                     <label>Location:</label>
-                    <input type="text" name="location" placeholder="address, city, or zip code" value={this.state.location} onChange={this.handleLocation} />
+                    <input type="text" name="location" placeholder="address, city, or zip code" value={this.state.location} onChange={e => {this.setState({ location: e.target.value })}} />
                 </div>
 
                 <Link to="/search">
@@ -68,5 +75,3 @@ class SearchFrom extends Component {
     }
 
 }
-
-export default withRouter(SearchFrom);

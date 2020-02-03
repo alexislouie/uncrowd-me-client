@@ -9,28 +9,10 @@ export default class HomeSearchFrom extends Component {
             query: "",
             location: 'New York, NY'
         };
-        this.handleQuery = this.handleQuery.bind(this);
-        this.handleLocation = this.handleLocation.bind(this);
     }
-
-    handleQuery(event) {
-        event.preventDefault();
-        this.setState({ query: event.target.value });
-        localStorage.setItem("query", event.target.value);
-    }
-    handleLocation(event) {
-        event.preventDefault();
-        this.setState({ location: event.target.value });
-        localStorage.setItem("location", event.target.value);
-    }
-
-    handleSubmit() {
-        this.setState({ formSubmitted: true });
-    }
-
+    
     render() {
         const { query, location } = this.state;
-
         return (
             <form className="homeSearchForm">
                 <div className="homeFormInput">
@@ -40,7 +22,10 @@ export default class HomeSearchFrom extends Component {
                         name="query"
                         placeholder="cafes, grocery stores, etc"
                         ref={this.queryInput}
-                        onChange={this.handleQuery}
+                        onChange={e => {
+                            this.setState({ query: e.target.value });
+                            localStorage.setItem("query", e.target.value);
+                        }}
                     />
                 </div>
                 <div className="homeFormInput">
@@ -51,7 +36,10 @@ export default class HomeSearchFrom extends Component {
                         placeholder="address, city, zip code"
                         value={location}
                         ref={this.locationInput}
-                        onChange={this.handleLocation}
+                        onChange={e => {
+                            this.setState({ location: e.target.value });
+                            localStorage.setItem("location", e.target.value);
+                        }}
                     />
                 </div>
                 <Link to="/search">
