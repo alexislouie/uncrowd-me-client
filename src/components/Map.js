@@ -41,6 +41,7 @@ export default class GoogleMap extends Component {
                     defaultCenter={userCoordinates}
                     defaultZoom={zoom}
                     yesIWantToUseGoogleMapApiInternals={true}
+                    resetBoundsOnResize
                 >
 
                     <MapMarker
