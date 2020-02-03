@@ -15,17 +15,17 @@ export default class Results extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        this.props.hideLoader();
+        console.log('results has updated')
+        this.props.showLoader(false);
         if (this.props.results !== prevProps.results) {
             this.fetchBusyHours();
         }
     }
 
     fetchBusyHours() {
+        // this.props.showLoader(true);
+
         const places = [];
-
-        this.props.showLoader();
-
         this.props.results.places.forEach(place => {
             const placeId = place.place_id;
             let refinedPlaceObj = {
@@ -125,7 +125,7 @@ export default class Results extends Component {
                         this.setState({ places });
                     }
                 })
-                .then(() => this.props.hideLoader());
+                .then(() => this.props.showLoader(false))
         });
     }
 
