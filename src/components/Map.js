@@ -38,7 +38,7 @@ export default class GoogleMap extends Component {
             <div style={{ height: '100vh', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyBmA40LNSpv2kVlUf8Byn-YW6W_ji6zuMY' }}
-                    defaultCenter={userCoordinates}
+                    center={userCoordinates}
                     defaultZoom={zoom}
                     yesIWantToUseGoogleMapApiInternals={true}
                     resetBoundsOnResize
