@@ -4,9 +4,6 @@ import HomeSearchForm from './HomeSearchForm'
 
 export default class Home extends Component {
     render() {
-        // const loader = document.querySelector('.loader');
-        // loader.classList.add('loader--hide');
-        
         return (
             <div className="homePage">
                 <main>

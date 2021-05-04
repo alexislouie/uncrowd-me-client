@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import SearchPage from './SearchPage';
 import Home from './Home';
@@ -8,12 +8,10 @@ import {
     TransitionGroup,
 } from 'react-transition-group';
 
-
 export default function App(props) {
     return (
         <Router>
             <Route render={({ location }) => (
-
                 <div className="app">
                     <main>
                         <TransitionGroup>
@@ -31,7 +29,6 @@ export default function App(props) {
                     </main>
                 </div>
             )} />
-
         </Router>
     );
 }

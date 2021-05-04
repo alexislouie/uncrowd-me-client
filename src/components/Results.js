@@ -1,22 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { updateHoverMarkerId, updateHoverCardId, clickMapMarker, updatePlaces } from '../actions'
+
 import { API_BASE_URL } from "../config";
 import Card from "./Card";
 import GoogleMap from "./Map";
 
-export default class Results extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            places: [],
-            hoveredMarkerId: "",
-            hoveredCardId: "",
-            clickedMarkerDetails: {}
-        };
-    }
+export class Results extends Component {
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         console.log('results has updated')
-        // this.props.showLoader(false);
         if (this.props.results !== prevProps.results) {
             this.fetchBusyHours();
         }
@@ -119,7 +113,7 @@ export default class Results extends Component {
                 .then(() => {
                     places.push(refinedPlaceObj);
                     if (places.length === this.props.results.places.length) {
-                        this.setState({ places });
+                        this.props.dispatch(updatePlaces(places))
                         this.props.showLoader(false);
                     }
                 })
@@ -127,20 +121,20 @@ export default class Results extends Component {
     }
 
     handleHoveredMarker(id) {
-        if (this.state.hoveredMarkerId !== id) {
-            this.setState({ hoveredMarkerId: id });
+        if (this.props.hoveredMarkerId !== id) {
+            this.props.dispatch(updateHoverMarkerId(id))
         }
     }
 
     handleHoveredCard(hoveredCardId) {
-        if (this.state.hoveredCardId !== hoveredCardId) {
-            this.setState({ hoveredCardId });
+        if (this.props.hoveredCardId !== hoveredCardId) {
+            this.props.dispatch(updateHoverCardId(hoveredCardId))
         }
     }
 
     handleMarkerClick(clickedMarkerDetails) {
-        if (this.state.clickedMarkerDetails !== clickedMarkerDetails) {
-            this.setState({ clickedMarkerDetails });
+        if (this.props.clickedMarkerDetails !== clickedMarkerDetails) {
+            this.props.dispatch(clickMapMarker(clickedMarkerDetails))
         }
     }
 
@@ -150,10 +144,10 @@ export default class Results extends Component {
             hoveredMarkerId,
             hoveredCardId,
             clickedMarkerDetails
-        } = this.state;
+        } = this.props;
         const { userCoordinates } = this.props.results;
 
-        if (this.state.places.length === 0) {
+        if (this.props.places.length === 0) {
             return null;
         }
 
@@ -178,9 +172,7 @@ export default class Results extends Component {
                         userCoordinates={userCoordinates}
                         hoveredCardId={hoveredCardId}
                         currentHover={hoveredMarkerId}
-                        updateHoveredMarker={this.handleHoveredMarker.bind(
-                            this
-                        )}
+                        updateHoveredMarker={this.handleHoveredMarker.bind(this)}
                         handleMarkerClick={this.handleMarkerClick.bind(this)}
                         infoBoxDetails={clickedMarkerDetails}
                         clickedMarker={clickedMarkerDetails.id}
@@ -193,3 +185,13 @@ export default class Results extends Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    results: state.results,
+    places: state.places,
+    hoveredMarkerId: state.hoveredMarkerId,
+    hoveredCardId: state.hoveredCardId,
+    clickedMarkerDetails: state.clickedMarkerDetails
+})
+
+export default connect(mapStateToProps)(Results);

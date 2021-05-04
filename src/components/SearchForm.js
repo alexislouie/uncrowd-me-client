@@ -1,68 +1,53 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { updateQuery, updateLocation, toggleFormSubmission } from '../actions';
+
 import './SearchForm.css'
+
 import { Route, withRouter, Link } from 'react-router-dom';
 
-export default class SearchFrom extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            query: this.props.query,
-            location: this.props.userLocation,
-            radius: '',
-            formWasSubmitted: false,
-            results: []
-        };
-
+export class SearchFrom extends Component {
+    constructor() {
+        super();
         this.onSubmit = this.onSubmit.bind(this);
-        // this.handleQuery = this.handleQuery.bind(this);
-        // this.handleLocation = this.handleLocation.bind(this);
         this.createDataObj = this.createDataObj.bind(this);
     }
 
     componentDidUpdate() {
-        if (this.state.formWasSubmitted === true) {
+        if (this.props.formWasSubmitted === true) {
             this.createDataObj();
         }
     }
 
     createDataObj() {
-        const { query, location, radius } = this.state;
+        const { query, location, radius } = this.props;
         this.props.onFormSubmit(query, location, radius);
-        this.setState({ formWasSubmitted: false })
+        this.props.dispatch(toggleFormSubmission(false))
     }
 
     onSubmit(event) {
         event.preventDefault();
-        const { query, location } = this.state;
+        const { query, location } = this.props;
         if (query === '' || !query) {
-            this.setState({ query: 'New Places' });
+            this.props.dispatch(updateQuery('New Places'))
         } 
         if (location === '' || !location) {
-            this.setState({ location: 'New York, NY' });
+            this.props.dispatch(updateLocation('New York, NY'))
         }
-        this.setState({ formWasSubmitted: true });
+        this.props.dispatch(toggleFormSubmission(true))
     }
-
-    // handleQuery(event) {
-    //     event.preventDefault();
-    //     this.setState({ query: event.target.value });
-    // }
-    
-    // handleLocation(event) {
-    //     event.preventDefault();
-    //     this.setState({ location: event.target.value });
-    // }
 
     render() {
         return (
             <form className="searchForm">
                 <div>
                     <label>What are you looking for?</label>
-                    <input type="text" name="query" placeholder="cafe, grocery store, etc." value={this.state.query} onChange={e => { this.setState({ query: e.target.value })}} />
+                    <input type="text" name="query" placeholder="cafe, grocery store, etc." value={this.props.query} onChange={e => { this.props.dispatch(updateQuery(e.target.value)) }} />
                 </div>
                 <div>
                     <label>Location:</label>
-                    <input type="text" name="location" placeholder="address, city, or zip code" value={this.state.location} onChange={e => {this.setState({ location: e.target.value })}} />
+                    <input type="text" name="location" placeholder="address, city, or zip code" value={this.props.location} onChange={e => { this.props.dispatch(updateLocation(e.target.value)) }} />
                 </div>
 
                 <Link to="/search">
@@ -73,5 +58,13 @@ export default class SearchFrom extends Component {
             </form>
         )
     }
-
 }
+
+const mapStateToProps = state => ({
+    query: state.query,
+    location: state.location,
+    radius: '',
+    formWasSubmitted: state.formWasSubmitted
+})
+
+export default connect(mapStateToProps)(SearchFrom);

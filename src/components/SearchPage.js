@@ -1,32 +1,20 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+
+import {toggleLoader, updateResults, updateQuery, updateLocation} from '../actions'
+
 import SearchForm from "./SearchForm";
 import Results from "./Results";
 import Loader from "./Loader";
+
 import "./SearchPage.css";
 import { API_BASE_URL } from "../config";
 
-export default class SearchPage extends Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         query: (localStorage.query === '') ? "Fun Places" : localStorage.getItem("query"),
-         location: (localStorage.location === '') ? "New York, NY" : localStorage.getItem("location"),
-         showLoader: true,
-         results: {}
-      };
-   }
+export class SearchPage extends Component {
    componentDidMount() {
-      const { query, location } = this.state;
+      const { query, location } = this.props;
       this.fetchResults(query, location);
-   }
-
-   toggleLoader(toggle) {
-      console.log('toggleLoader has been called')
-      if(this.state.showLoader !== toggle) {
-         console.log('this.state.showLoader is being toggled to: ', toggle)
-         this.setState({ showLoader: toggle })
-      }
    }
 
    fetchResults(query, location) {
@@ -40,18 +28,24 @@ export default class SearchPage extends Component {
               return res.json();
           })
           .then(data => {
-            this.setState({ 
-               results: data,
-               query,
-               location 
-            });
-            localStorage.setItem('query', '');
-            localStorage.setItem('location', '');
+            console.log('data: ', data)
+             this.props.dispatch(updateResults(data));
+             this.props.dispatch(updateQuery(query));
+             this.props.dispatch(updateLocation(location));
           })
    }
 
+   toggleLoader(toggle) {
+      console.log('toggleLoader has been called')
+      if (this.props.showLoader !== toggle) {
+         console.log('this.state.showLoader is being toggled to: ', toggle)
+         this.props.dispatch(toggleLoader(toggle));
+      }
+   }
+
+
    render() {
-      const { query, location, results, showLoader } = this.state;
+      const { query, location, results, showLoader } = this.props;
 
       return (
          <div className="searchPage">
@@ -95,9 +89,17 @@ export default class SearchPage extends Component {
             <Loader showLoader={showLoader}/>
             <Results
                showLoader={this.toggleLoader.bind(this)}
-               results={results}
             />
          </div>
       );
    }
 }
+
+const mapStateToProps = state => ({
+   query: state.query,
+   location: state.location,
+   showLoader: state.showLoader,
+   results: {}
+})
+
+export default connect(mapStateToProps)(SearchPage);

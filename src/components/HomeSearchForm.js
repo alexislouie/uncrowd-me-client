@@ -1,18 +1,12 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import "./HomeSearchForm.css";
 import { Link } from "react-router-dom";
 
-export default class HomeSearchFrom extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            query: "",
-            location: 'New York, NY'
-        };
-    }
-    
+import {updateQuery, updateLocation} from '../actions';
+
+export class HomeSearchFrom extends Component {
     render() {
-        const { query, location } = this.state;
         return (
             <form className="homeSearchForm">
                 <div className="homeFormInput">
@@ -23,8 +17,9 @@ export default class HomeSearchFrom extends Component {
                         placeholder="cafes, grocery stores, etc"
                         ref={this.queryInput}
                         onChange={e => {
-                            this.setState({ query: e.target.value });
+                            this.props.dispatch(updateQuery(e.target.value))
                             localStorage.setItem("query", e.target.value);
+
                         }}
                     />
                 </div>
@@ -34,10 +29,10 @@ export default class HomeSearchFrom extends Component {
                         type="text"
                         name="location"
                         placeholder="address, city, zip code"
-                        value={location}
+                        value={this.props.location}
                         ref={this.locationInput}
                         onChange={e => {
-                            this.setState({ location: e.target.value });
+                            this.props.dispatch(updateLocation(e.target.value))
                             localStorage.setItem("location", e.target.value);
                         }}
                     />
@@ -54,3 +49,10 @@ export default class HomeSearchFrom extends Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    query: state.query,
+    location: state.location
+})
+
+export default connect(mapStateToProps)(HomeSearchFrom);
